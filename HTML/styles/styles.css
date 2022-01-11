@@ -1,0 +1,36 @@
+.nav{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	background-color: grey;
+	text-align: center;
+}
+
+.nav li{
+	display: inline;
+}
+
+.nav a{
+	display: inline-block;
+	color: white;
+	padding: 20px 30px;
+	text-decoration: none;
+	border-radius: 10px;
+}
+
+.nav a:visited{
+	color: white;
+}
+
+.nav a:hover{
+	color: black;
+	background: gray;
+	border: 25px;
+}
+
+.nav a.current{
+	color: black;
+	border: 25px;
+	border-radius: 10px;
+	background: lightgray;
+}
