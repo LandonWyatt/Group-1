@@ -5,6 +5,7 @@
 		<title>Medicare - Product Management</title>
 		<link rel="stylesheet" href="styles\styles.css">
 		<link rel="stylesheet" href="styles\productStyles.css">
+		<script src="js/script.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div>
@@ -17,7 +18,7 @@
 				<li><a href="#login">Login</a></li>
 			</ul>
 		</div>
-		<div id="products">
+		<div class="products">
 			<h2>
 				Available Products
 			</h2>
@@ -37,7 +38,7 @@
 				Search: 
 				<input type="search" name="searchBar">
 			</label>
-			<table id="productTable">
+			<table class="productTable">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -46,7 +47,7 @@
 						<th>Brand</th>
 						<th>Qty. Avail.</th>
 						<th>Unit Price</th>
-						<th>Add to Cart</th>
+						<th>Quantity</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -57,7 +58,12 @@
 						<td>Cipla</td> <!-- Brand -->
 						<td>50</td> <!-- Qty -->
 						<td>$18</td> <!-- Price -->
-						<td><input type="number" name="qtyToCart" id="qtyToCart"/><a href="#">Add to Cart</a></td> <!-- Add to Cart -->
+						<td><input type="number" name="qtyToCart" id="qtyToCart" min="0"/></td> <!-- Quantity -->
+						<td> <!-- Add to Cart -->
+							<a href="#">
+								<img src="images/add-to-cart.png" alt="Add to Cart" height="30" />
+							</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

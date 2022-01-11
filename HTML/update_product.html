@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Medicare - Edit Product</title>
+		<title>Medicare - Update Product</title>
 		<link rel="stylesheet" href="styles\styles.css">
 		<link rel="stylesheet" href="styles\productStyles.css">
 	</head>
@@ -17,8 +17,8 @@
 				<li><a href="#login">Login</a></li>
 			</ul>
 		</div>
-		<div id="products">
-			<h2>
+		<div class="products">
+			<h2 id="updateHeader">
 				Update Product
 			</h2>
 			<form action="#">
@@ -40,11 +40,12 @@
 						<td><input type="text"></td>
 					</tr>
 					<tr>	
-						<td>Price</td> <!-- Price -->
+						<td>Price:</td> <!-- Price -->
 						<td><input type="text"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><button type="submit" id="updateButton">Update</button></td>
+						<td><button type="submit" id="deleteButton">Delete</button></td>
+						<td><button type="submit" id="updateButton">Update</button></td>
 					</tr>
 				</table>
 			</form>

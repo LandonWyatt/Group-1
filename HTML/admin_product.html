@@ -5,6 +5,7 @@
 		<title>Medicare - Product Management</title>
 		<link rel="stylesheet" href="styles\styles.css">
 		<link rel="stylesheet" href="styles\productStyles.css">
+		<script src="js/script.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div>
@@ -17,7 +18,7 @@
 				<li><a href="#login">Login</a></li>
 			</ul>
 		</div>
-		<div id="products">
+		<div class="products">
 			<h2>
 				Available Products
 			</h2>
@@ -37,7 +38,7 @@
 				Search: 
 				<input type="search" name="searchBar">
 			</label>
-			<table id="productTable">
+			<table class="productTable">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -47,7 +48,6 @@
 						<th>Qty. Avail.</th>
 						<th>Unit Price</th>
 						<th>Activate</th>
-						<th>Edit</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -58,8 +58,17 @@
 						<td>Cipla</td> <!-- Brand -->
 						<td>50</td> <!-- Qty -->
 						<td>$18</td> <!-- Price -->
-						<td><input type="checkbox" name="toggle"></td> <!-- Activate -->
-						<td><a href="#">Edit</a></td> <!-- Edit -->
+						<td>
+							<label class="switch">
+								<input type="checkbox" name="toggle">
+								<span class="slider round"></span>
+							</label>
+						</td> <!-- Activate -->
+						<td> <!-- Edit -->
+							<a href="#" >
+								<img src="images/edit-icon.png" alt="Edit" height="30"/>
+							</a>
+						</td> 
 					</tr>
 				</tbody>
 			</table>
