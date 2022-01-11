@@ -1,0 +1,51 @@
+/* user_product.html/admin_product.html */
+#products {
+	width: 80%; /* needs adjusting to fit overall window */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.defineEntries {
+	padding-bottom: 5px;
+}
+#showEntries {
+	float: left;
+}
+#searchEntries {
+	float: right;
+}
+
+#productTable {
+	border-collapse: collapse;
+	width: 100%; /* needs adjusting */
+	text-align: left;
+}
+#productTable thead {
+	border-bottom: 2px solid lightgrey;
+}
+#productTable th, td {
+	border: 1px solid lightgrey;
+	padding: 5px;
+}
+#productTable img {
+	max-height: 120px;
+}
+
+#qtyToCart {
+	width: 50px;
+}
+
+/* update_product.html */
+#updateProduct {
+	border-collapse: collapse;
+	width: auto; /* needs adjusting */
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+#updateProduct td {
+	border: none;
+}
+#updateButton {
+	float: right;
+}
