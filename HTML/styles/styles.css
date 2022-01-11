@@ -1,3 +1,7 @@
+body {
+	margin: auto;
+}
+
 .nav{
 	list-style-type: none;
 	margin: 0;
@@ -33,4 +37,37 @@
 	border: 25px;
 	border-radius: 10px;
 	background: lightgray;
+}
+
+/* product.html */
+#products {
+	width: 80%; /* needs adjusting to fit overall window */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.defineEntries {
+	padding-bottom: 5px;
+}
+#showEntries {
+	float: left;
+}
+#searchEntries {
+	float: right;
+}
+
+#productTable {
+	border-collapse: collapse;
+	width: 100%; /* needs adjusting */
+	text-align: left;
+}
+#productTable thead {
+	border-bottom: 2px solid lightgrey;
+}
+#productTable th, td {
+	border: 1px solid lightgrey;
+	padding: 5px;
+}
+#productTable img {
+	max-height: 120px;
 }
