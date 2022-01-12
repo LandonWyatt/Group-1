@@ -17,6 +17,8 @@ public class User {
 	private String passWord;
 	private boolean admin;
 	
+	public User() {}
+	
 	public User(Long id, String firstName, String lastName, String email, String passWord, boolean admin) {
 		super();
 		this.id = id;

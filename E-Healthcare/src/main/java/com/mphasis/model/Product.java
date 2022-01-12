@@ -18,6 +18,8 @@ public class Product {
 	private double price;
 	private boolean activate;
 	
+	public Product() {}
+	
 	public Product(Long id, String image, String name, String brand, long qtyAvailable, double price, boolean activate) {
 		super();
 		this.id = id;
