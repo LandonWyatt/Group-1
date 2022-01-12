@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mphasis.model.User;
 import com.mphasis.repository.ProductRepository;
 import com.mphasis.repository.UserRepository;
 
@@ -33,7 +34,7 @@ public class UserService {
 	}
 	
 	public void updateProduct(Long id, User user) {
-		if(productRepository.findById(id).get() != null) {
+		if(userRepository.findById(id).get() != null) {
 			userRepository.save(user);
 		}
 	}
