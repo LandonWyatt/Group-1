@@ -49,6 +49,9 @@ input[type=number] {
 #updateProduct td {
 	border: none;
 }
+#updateTag {
+	float: right;
+}
 #updateButton {
 	float: right;
 }
@@ -69,6 +72,9 @@ input[type=number] {
 .cartTable thead {
 	border-bottom: 5px solid lightgrey;
 }
+.cartTable thead th {
+	padding-bottom: 5px;
+}
 .cartTable img {
 	max-height: 120px;
 }
@@ -80,7 +86,7 @@ input[type=number] {
 }
 #cartManagement td {
 	border: none;
-	padding: 5px;
+	padding: 10px 5px 5px;
 	border-top: 5px solid lightgrey;
 }
 #continueShoppingButton {

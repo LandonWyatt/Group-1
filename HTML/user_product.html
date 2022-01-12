@@ -37,8 +37,7 @@
 				entries
 			</label>
 			<label class="defineEntries" id="searchEntries">
-				Search: 
-				<input type="search" name="searchBar">
+				<input type="search" placeholder="Search..." id="searchBar" name="searchBar" onkeyup="takeInput()">
 			</label>
 			<table class="productTable">
 				<thead>
@@ -60,7 +59,7 @@
 						<td>Cipla</td> <!-- Brand -->
 						<td>50</td> <!-- Qty -->
 						<td>$18</td> <!-- Price -->
-						<td><input type="number" name="qtyToCart" id="qtyToCart" min="0"/></td> <!-- Quantity -->
+						<td><input type="number" name="qtyToCart" id="qtyToCart" min="1"/></td> <!-- Quantity -->
 						<td> <!-- Add to Cart -->
 							<a href="#">
 								<img src="images/add-to-cart.png" alt="Add to Cart" height="30" />
