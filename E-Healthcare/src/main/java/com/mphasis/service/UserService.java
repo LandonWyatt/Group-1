@@ -16,7 +16,7 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public List<User> getAllProducts() {
+	public List<User> getAllUsers() {
 		List<User> products = new ArrayList<>();
 		
 		userRepository.findAll().forEach(products::add);
@@ -24,21 +24,21 @@ public class UserService {
 		return products;
 	}
 	
-	public Optional<User> getProduct(Long id) {
+	public Optional<User> getUser(Long id) {
 		return userRepository.findById(id);
 	}
 	
-	public void addProduct(User user) {
+	public void addUser(User user) {
 		userRepository.save(user);
 	}
 	
-	public void updateProduct(Long id, User user) {
+	public void updateUser(Long id, User user) {
 		if(userRepository.findById(id).get() != null) {
 			userRepository.save(user);
 		}
 	}
 	
-	public void deleteProduct(Long id) {
+	public void deleteUser(Long id) {
 		userRepository.deleteById(id);
 	}
 }
