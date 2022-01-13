@@ -18,6 +18,13 @@ public class UserService {
 		return userRepository.findById(id);
 	}
 	
+	public Boolean checkUser(Long id) {
+		if (userRepository.findById(id) != null)
+			return true;
+		else
+			return false;
+	}
+	
 	public void addUser(User user) {
 		userRepository.save(user);
 	}
