@@ -14,10 +14,10 @@ public class SignUpController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/signup")
-	public String showSignUpPage() {
-		return "signup";
-	}
+//	@GetMapping("/signup")
+//	public String getSignup() {
+//		return "signup";
+//	}
 	
 	@PostMapping("/signup")
 	public String signUpUserPage(User user) {

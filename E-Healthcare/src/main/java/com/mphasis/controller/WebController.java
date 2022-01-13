@@ -21,5 +21,20 @@ public class WebController {
 		// user_product or admin_product
 		return "user_product";
 	}
+	
+	@GetMapping("/contact")
+	public String getContact() {
+		return "contact";
+	}
+	
+	@GetMapping("/login")
+	public String getLogin() {
+		return "login";
+	}
+	
+	@GetMapping("/signup")
+	public String getSignup() {
+		return "signup";
+	}
 
 }

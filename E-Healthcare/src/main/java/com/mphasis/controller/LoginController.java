@@ -13,10 +13,10 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/login")
-	public String showLoginPage() {
-		return "login";
-	}
+//	@GetMapping("/login")
+//	public String showLoginPage() {
+//		return "login";
+//	}
 	
 	@PostMapping("/login")
 	public String checkLoginPage(Long id) {

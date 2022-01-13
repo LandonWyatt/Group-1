@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
 	<title>Login</title>
@@ -9,14 +9,14 @@
 <body>
 	<div class="nav">
 		<ul class="nav-left">
-			<li><a href="index.html">Main Page</a></li>
-			<li><a href="about.html">About</a></li>
-			<li><a href="contact.html">Contact</a></li>
-			<li><a href="#">View Products</a></li>
+			<li><a th:href="@{/}">Main Page</a></li>
+			<li><a th:href="@{/about}">About</a></li>
+			<li><a th:href="@{/contact}">Contact</a></li>
+			<li><a th:href="@{/product}">View Products</a></li>
 		</ul>
 		<ul class="nav-right">
-			<li><a href="signup.html">Sign Up</a></li>
-			<li><a href="login.html">Login</a></li>
+			<li><a th:href="@{/login}">Login</a></li>
+			<li><a th:href="@{/signup}">Sign Up</a></li>
 		</ul>
 	</div>
 
@@ -31,7 +31,7 @@
 					<input id="password" type="password" placeholder="Enter Password" name="password" required><br><br>
 				</div>
 				<button id=loginButton type="submit">Login</button><br>
-				<h2 id="loginHeader2">New user? <a href="signup.html"> Register Here</a></h2>
+				<h2 id="loginHeader2">New user? <a th:href="@{/signup}"> Register Here</a></h2>
 			</div>
 		</form>
 	</main>
