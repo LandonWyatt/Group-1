@@ -1,0 +1,64 @@
+body {
+	margin: auto;
+	font-family: Calibri;
+}
+
+.nav {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	position: relative;
+	width: 100%;
+	height: 60px;
+	border-bottom: 1px solid black;
+	z-index: 1;
+	background: lightgray;
+}
+
+.nav li{
+	display: inline;
+}
+
+.nav a{
+	display: inline-block;
+	color: blue;
+	padding: 20px 20px;
+	text-decoration: none;
+	border-radius: 5px;
+	align-items: center;
+}
+
+.nav a:visited{
+	color: purple;
+}
+
+.nav a:hover{
+	color: white;
+	background: gray;
+	border: 25px;
+}
+
+.nav a.current{
+	color: black;
+	border: 25px;
+	border-radius: 10px;
+	background: lightgray;
+}
+
+.nav-left, .nav-right{
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	flex-basis: 700px;
+	align-items: center;
+	width: 300px;
+	z-index: 1;
+}
+
+.nav-left{
+	justify-content: flex-start;
+}
+
+.nav-right{
+	justify-content: flex-end;
+}
