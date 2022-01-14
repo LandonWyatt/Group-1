@@ -1,6 +1,14 @@
 body {
-	margin: auto;
+	margin: 0;
 	font-family: Calibri;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 .nav {
