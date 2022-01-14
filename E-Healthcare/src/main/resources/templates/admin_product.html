@@ -5,6 +5,9 @@
 		<title>Medicare - Product Management</title>
 		<link rel="stylesheet" href="/css/styles.css">
 		<link rel="stylesheet" href="/css/productStyles.css">
+		<script th:inline="javascript">
+			// var numChosen2 = [[${numChosen}]];
+		</script>
 		<script src="/js/script.js" type="text/javascript"></script>
 	</head>
 	<body>
@@ -24,16 +27,16 @@
 			<h2>
 				Available Products
 			</h2>
-			<label class="defineEntries" id="showEntries">
+			<label class="numEntries">
 				Show 
-				<select onchange="showEntries()" name="numEntries" id="numEntries">
-					<option value="5">5</option>
-					<option value="10">10</option>
-					<option value="20">20</option>
-					<option value="30">30</option>
-					<option value="40">40</option>
-					<option value="50">50</option>
-				</select>
+					<select onchange="showEntries()" name="numEntries" id="numEntries">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+						<option value="40">40</option>
+						<option value="50">50</option>
+					</select>
 				entries
 			</label>
 			<label class="defineEntries" id="searchEntries">
@@ -56,7 +59,8 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="product : ${products}">
+							<!-- <tr th:each="product : ${products}"> -->
+							<tr id="prodIter" th:each="product, iterStat : ${products}" th:if="${iterStat.index}<${numChosen}">
 								<td th:text="${product.id}"></td> <!-- ID -->
 								<td><img th:alt="${product.id}" th:src="${product.image}"></td> <!-- Photo -->
 								<td th:text="${product.name}"></td> <!-- Name -->

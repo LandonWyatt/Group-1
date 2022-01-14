@@ -274,9 +274,10 @@ footer{
 	.footer-distributed .footer-center i{
 		margin-left: 0;
 	}
+}
 @media screen and (max-width: 650px) {
   .column {
     width: 100%;
     display: block;
   }
-  
+}
