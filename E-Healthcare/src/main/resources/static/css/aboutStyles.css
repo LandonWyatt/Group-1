@@ -1,18 +1,4 @@
 
-
-/* body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-}
-
-html {
-  box-sizing: border-box;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-} */
-
 .column {
   float: left;
   width: 33.3%;
@@ -47,19 +33,19 @@ html {
 }
 
 .button {
-  border: none;
-  outline: 0;
   display: inline-block;
-  padding: 8px;
+  padding: 8px 0px;
   color: white;
-  background-color: #000;
+  background-color: #04AA6D;
   text-align: center;
   cursor: pointer;
   width: 100%;
+  outline:  2px solid white;
+  border-radius: 5px;
 }
 
 .button:hover {
-  background-color: #555;
+  background-color: #45a049;
 }
 
 html{
