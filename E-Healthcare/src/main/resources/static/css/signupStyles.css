@@ -15,10 +15,10 @@ input:placeholder-shown {
 .container {
 	background-color: white;
 	width: 600px;
-	height: 540px;
+	height: 530px;
 	margin: auto;
 	position: relative;
-	outline: 2px solid blue;
+	outline: 2px solid green;
 	border-radius: 5px;
 	box-shadow: 0px 5px 5px grey;
 }
@@ -36,7 +36,8 @@ input:placeholder-shown {
 	font-family: initial;
 	font-size: 28px;
 	font-weight: bold;
-	background-color: #2a9df4;
+	color: white;
+	background-color: #04AA6D;
 	padding-top: 15px;
 	padding-left: 15px;
 	box-sizing: border-box;
@@ -47,7 +48,7 @@ input:placeholder-shown {
 	font-family: initial;
 	font-size: initial;
 	font-weight: initial;
-	border-top: 1px solid #2a9df4;
+	border-top: 1px solid #04AA6D;
 	padding-top: 10px;
 	padding-right: 10px;
 }

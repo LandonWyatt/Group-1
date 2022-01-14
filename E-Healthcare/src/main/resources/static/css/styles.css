@@ -1,6 +1,7 @@
 body {
 	margin: 0;
-	font-family: Calibri;
+	font-family: 'Open Sans',Helvetica,Arial;
+	font: 16px/1.0 Arial, sans-serif;
 }
 
 html {
@@ -66,7 +67,7 @@ button:active {
 
 .nav a:hover{
 	color: white;
-	background: gray;
+	background: #04AA6D;
 	border: 25px;
 }
 
@@ -262,8 +263,11 @@ button:active {
 	.footer-distributed .footer-center i{
 		margin-left: 0;
 	}
+}
+
 @media screen and (max-width: 650px) {
   .column {
     width: 100%;
     display: block;
   }
+}
