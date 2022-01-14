@@ -87,20 +87,20 @@ He earned his Master’s in Nursing from Texas University where he graduated sum
   </div>
 </div>
 
-<footer class="footer-distributed" >
+	<footer class="footer-distributed" >
 
 			<div class="footer-left">
           
 				<h3>About<span>Medicine</span></h3>
 
 				<p class="footer-links">
-					<a href="#">Home</a>
+					<a th:href="@{/}">Home</a>
 					
 					
 					|
-					<a href="#">About</a>
+					<a th:href="@{/about}">About</a>
 					|
-					<a href="#">Contact</a>
+					<a th:href="@{/contact}">Contact</a>
 				</p>
 
 				<p class="footer-company-name">© 2022 HealthCare Solutions Pvt. Ltd.</p>
@@ -135,7 +135,13 @@ He earned his Master’s in Nursing from Texas University where he graduated sum
 				</div>
 			</div>
 		</footer>
+		
 
-
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="/js/headroom.min.js"></script>
+	<script src="/js/jQuery.headroom.min.js"></script>
+	<script src="/js/template.js"></script>
 </body>
 </html>
