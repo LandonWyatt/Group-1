@@ -39,35 +39,41 @@
 			<label class="defineEntries" id="searchEntries">
 				<input type="search" placeholder="Search..." id="searchBar" name="searchBar" onkeyup="takeInput()">
 			</label>
-			<table class="productTable">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th></th>
-						<th>Name</th>
-						<th>Brand</th>
-						<th>Qty. Avail.</th>
-						<th>Unit Price</th>
-						<th>Quantity</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1</td> <!-- ID -->
-						<td><img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-157402355-1549537663.jpg?crop=1.00xw:0.806xh;0,0.0583xh&resize=980:*"></td> <!-- Photo -->
-						<td>Paracetamol</td> <!-- Name -->
-						<td>Cipla</td> <!-- Brand -->
-						<td>50</td> <!-- Qty -->
-						<td>$18</td> <!-- Price -->
-						<td><input type="number" name="qtyToCart" id="qtyToCart" min="1"/></td> <!-- Quantity -->
-						<td> <!-- Add to Cart -->
-							<a href="#">
-								<img src="/images/add-to-cart.png" alt="Add to Cart" height="30" />
-							</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<br/>
+			<div th:switch="${products}">
+				<h2 th:case="null">No products found.</h2>
+				<div th:case="*">
+					<table class="productTable">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th></th>
+								<th>Name</th>
+								<th>Brand</th>
+								<th>Qty. Avail.</th>
+								<th>Unit Price</th>
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="product : ${products}">
+								<td th:text="${product.id}"></td> <!-- ID -->
+								<td><img th:alt="${product.id}" th:src="${product.image}"></td> <!-- Photo -->
+								<td th:text="${product.name}"></td> <!-- Name -->
+								<td th:text="${product.brand}"></td> <!-- Brand -->
+								<td th:text="${product.qtyAvailable}"></td> <!-- Qty -->
+								<td th:text="${product.price}"></td> <!-- Price -->
+								<td><input type="number" name="qtyToCart" id="qtyToCart" min="1"/></td> <!-- Quantity -->
+								<td> <!-- Add to Cart -->
+									<a href="#">
+										<img src="/images/add-to-cart.png" alt="Add to Cart" height="30" />
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
