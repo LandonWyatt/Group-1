@@ -20,17 +20,9 @@ public class Product {
 	private double price;
 	private boolean activate;
 	
-	public Product() {}
-	
-	public Product(Long id, String image, String name, String brand, long qtyAvailable, double price, boolean activate) {
-		super();
-		this.id = id;
-		this.image = image;
-		this.name = name;
-		this.brand = brand;
-		this.qtyAvailable = qtyAvailable;
-		this.price = price;
-		this.activate = activate;
+	public Product() {
+		this.image = "/images/products/" + this.id + ".jpg";
+		this.activate = false;
 	}
 	
 	public Long getId() {
