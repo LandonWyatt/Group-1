@@ -21,30 +21,27 @@
 		</ul>
 	</div>
 
-<h2>Contact US</h2>
-
-
 <div class="container">
   <div style="text-align:center">
     <h2>Contact Us</h2>
-    <p>
+    <p style="font: 16px/1.6 Arial, sans-serif">
 We are always ready to assist you. We value every customer and we know what long-term relations are.
 If you happen to have any question please contact our customer care specialists. You will receive a response for sure.
 Please use the form below to receive a quick reply. </p>
   </div>
   <div class="row">
     <div class="column">
-      <img src="C:/Users/ATEDI/OneDrive/Desktop/praticeMphasis/img3.png" style="width:100%;height:85%">
+      <img src="images/img3.png" style="width:100%;height:85%">
     </div>
     <div class="column">
       <form action="/action_page.php">
         <label for="fname">Name:</label>
-        <input type="text" id="fname" name="name" placeholder="Your name..">
+        <input type="text" id="fname" name="name" placeholder="Your name.." required>
         <label for="lname">E-mail:</label>
-        <input type="text" id="lname" name="email" placeholder="abc@gmail.com">
+        <input type="email" id="lname" name="email" placeholder="abc@gmail.com" required>
         <label for="country">Subject:</label>
-        <select id="country" name="country">
-		  <option value="opt">Pick One</option>
+        <select id="country" name="country" required>
+		  <option value="opt" selected disabled>------------</option>
           <option value="opt1">Questions regarding medicine</option>
           <option value="opt2">Reprocess my credit card</option>
           <option value="opt3">Did not receive my order</option>
@@ -57,8 +54,8 @@ Please use the form below to receive a quick reply. </p>
 		  
         </select>
         <label for="subject">Message:</label>
-        <textarea id="subject" name="message" placeholder="Write something.." style="height:170px"></textarea>
-        <input type="submit" value="Submit">
+        <textarea id="subject" name="message" placeholder="Write something.." style="height:170px" required></textarea>
+        <button type="submit" value="Submit">Submit</button>
       </form>
     </div>
   </div>
@@ -67,7 +64,7 @@ Please use the form below to receive a quick reply. </p>
 	
 
 </body>
-<footer class="footer-distributed" style="background-color: #2c292f">
+	<footer class="footer-distributed" >
 
 			<div class="footer-left">
           
@@ -75,6 +72,8 @@ Please use the form below to receive a quick reply. </p>
 
 				<p class="footer-links">
 					<a th:href="@{/}">Home</a>
+					
+					
 					|
 					<a th:href="@{/about}">About</a>
 					|
@@ -112,6 +111,13 @@ Please use the form below to receive a quick reply. </p>
 					<a href="#"><i class="fa fa-youtube"></i></a>
 				</div>
 			</div>
-		</footer>	
+		</footer>
+		
 
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="/js/headroom.min.js"></script>
+	<script src="/js/jQuery.headroom.min.js"></script>
+	<script src="/js/template.js"></script>
 </html>
