@@ -1,10 +1,19 @@
 package com.mphasis.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.mphasis.model.Product;
 
 @Controller
 public class WebController {
+	
+	ProductController productController;
 	
 	@GetMapping("/")
 	public String getHome() {
@@ -14,6 +23,19 @@ public class WebController {
 	@GetMapping("/about")
 	public String getAbout() {
 		return "about";
+	}
+	
+	@GetMapping("/cart")
+	public ModelAndView getCart(Map<String, Object> model) {
+		List<Product> productsList = productController.getAllProducts();
+		model.put("products", productsList);
+		return new ModelAndView("cart");
+	}
+	
+	@PostMapping("/save_to_cart")
+	public String saveToCart() {
+		
+		return "redirect:/cart";
 	}
 	
 	@GetMapping("/contact")
