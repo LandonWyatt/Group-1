@@ -39,7 +39,7 @@
 				entries
 			</label>
 			<label class="defineEntries" id="searchEntries" hx-trigger="change delay:0.1s" hx-get="/productChangeSearch" hx-target="#table" hx-swap="outerHTML">
-				<input type="search" placeholder="Search..." id="searchBar" name="searchBar" onkeyup="takeInput()">
+				<input type="search" placeholder="Search Name or Brand..." id="searchBar" name="searchBar" onkeyup="takeInput()">
 			</label>
 			<br/>
 			<div th:switch="${products}">
