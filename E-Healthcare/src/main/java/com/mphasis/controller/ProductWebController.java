@@ -24,14 +24,14 @@ public class ProductWebController {
 	
 	@GetMapping("/product")
 	public ModelAndView getProduct(Map<String, Object> model) {
-		// user_product or admin_product needs to be determined and decide which to return
 		System.out.println("/product mapping visited");
 		
 		List<Product> productsList = productController.getAllProductSearch(searchStr);
 		
 		model.put("numChosen", numEntries);
 		model.put("products", productsList);
-		return new ModelAndView("user_product");
+		// user_product or admin_product needs to be determined and decide which to return
+		return new ModelAndView("admin_product");
 	}
 	
 	@GetMapping("/productChangeEntries")
@@ -40,7 +40,8 @@ public class ProductWebController {
 		
 		model.put("numChosen", numEntries);
 		model.put("products", productsList);
-		return new ModelAndView("user_product_table.html :: product");
+		// user_product or admin_product needs to be determined and decide which to return
+		return new ModelAndView("admin_product_table.html :: product");
 	}
 	
 	@PostMapping("/productChangeEntries")
@@ -55,7 +56,8 @@ public class ProductWebController {
 		
 		model.put("numChosen", numEntries);
 		model.put("products", productsList);
-		return new ModelAndView("user_product_table.html :: product");
+		// user_product or admin_product needs to be determined and decide which to return
+		return new ModelAndView("admin_product_table.html :: product");
 	}
 	
 	@PostMapping("/productChangeSearch")
