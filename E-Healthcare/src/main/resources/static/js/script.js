@@ -1,34 +1,25 @@
 /* Search Script */
 function takeInput() {
-	var search = document.getElementById("searchBar");
-	console.log(search.value);
+	var searchBarVal = document.getElementById("searchBar").value;
+	
+	let data = {searchStr: searchBarVal};
+	
+	fetch("/productChangeSearch", {
+	  method: "POST",
+	  headers: {'Content-Type': 'application/json'}, 
+	  body: JSON.stringify(data)
+	})
 }
 
 /* Number of Entries Script */
 function showEntries() {
-	var numChosen = document.getElementById("numEntries").value;
+	var numEntriesVal = document.getElementById("numEntries").value;
 	
-	let data = {numChosen: numChosen};
+	let data = {numEntries: numEntriesVal};
 
-	fetch("/productChange", {
+	fetch("/productChangeEntries", {
 	  method: "POST",
 	  headers: {'Content-Type': 'application/json'}, 
 	  body: JSON.stringify(data)
-	}).then(res => {
-	  console.log("Request complete! response:", res);
-	});
-	
-	/*
-	Look at th:fragment 
-	https://www.baeldung.com/spring-thymeleaf-fragments
-	https://frontbackend.com/thymeleaf/how-to-work-with-fragments-in-thymeleaf
-	*/
-	
-	/*setTimeout(() => {
-		location.reload();
-	}, 500)
-
-	console.log(numChosen2);
-	document.querySelector('#numEntries option[value="' + numChosen2 +'"]').selected = true;*/
-
+	})
 }

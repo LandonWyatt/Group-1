@@ -3,6 +3,7 @@ package com.mphasis.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,22 @@ public class ProductService {
 		productRepository.findAll().forEach(products::add);
 		
 		return products;
+	}
+	
+	public List<Product> getAllProductSearch(String str) {
+		List<Product> productNames = new ArrayList<>();
+		
+		Predicate<Product> prodNamePred = (Product prod) -> {
+			if(str != "") {
+				if((prod.getName()).toUpperCase().contains(str.toUpperCase()) || (prod.getBrand()).toUpperCase().contains(str.toUpperCase()))
+					return true;
+				else
+					return false;
+			} else {return true;}
+		};
+		
+		this.getAllProducts().stream().filter(prodNamePred).forEach(productNames::add);
+		return productNames;
 	}
 	
 	public Optional<Product> getProduct(Long id) {

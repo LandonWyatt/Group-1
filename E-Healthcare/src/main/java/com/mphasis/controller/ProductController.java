@@ -22,6 +22,11 @@ public class ProductController {
 		return productService.getAllProducts();
 	}
 	
+	@GetMapping("/productSearch")
+	public List<Product> getAllProductSearch(String str) {
+		return productService.getAllProductSearch(str);
+	}
+	
 	@PostMapping("/products")
 	public void addProduct(@RequestBody Product product) {
 		productService.addProduct(product);

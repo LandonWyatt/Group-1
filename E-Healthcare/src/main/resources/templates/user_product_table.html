@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<script src="https://unpkg.com/htmx.org@1.6.1"></script>
+	</head>
+	<body>
+		<div th:fragment="product" id="table">
+			<table class="productTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th></th>
+						<th>Name</th>
+						<th>Brand</th>
+						<th>Qty. Avail.</th>
+						<th>Unit Price</th>
+						<th>Quantity</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="prodIter" th:each="product, iterStat : ${products}" th:if="${iterStat.index}<${numChosen}">
+						<td th:text="${product.id}"></td> <!-- ID -->
+						<td><img th:alt="${product.id}" th:src="${product.image}"></td> <!-- Photo -->
+						<td th:text="${product.name}"></td> <!-- Name -->
+						<td th:text="${product.brand}"></td> <!-- Brand -->
+						<td th:text="${product.qtyAvailable}"></td> <!-- Qty -->
+						<td th:text="${product.price}"></td> <!-- Price -->
+						<td><input type="number" name="qtyToCart" id="qtyToCart" min="1"/></td> <!-- Quantity -->
+						<td> <!-- Add to Cart -->
+							<a href="#">
+								<img src="/images/add-to-cart.png" alt="Add to Cart" height="30" />
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>
