@@ -30,11 +30,12 @@ public class ProductService {
 		
 		Predicate<Product> prodNamePred = (Product prod) -> {
 			if(str != "") {
-				if((prod.getName()).toUpperCase().contains(str.toUpperCase()) || (prod.getBrand()).toUpperCase().contains(str.toUpperCase()))
+				if((prod.getName()).toUpperCase().contains(str.toUpperCase())
+					|| (prod.getBrand()).toUpperCase().contains(str.toUpperCase()))
 					return true;
 				else
 					return false;
-			} else {return true;}
+			} else {return true;} // if search string is empty, simply return true for each value
 		};
 		
 		this.getAllProducts().stream().filter(prodNamePred).forEach(productNames::add);

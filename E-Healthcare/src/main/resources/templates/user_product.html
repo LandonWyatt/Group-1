@@ -39,7 +39,7 @@
 				entries
 			</label>
 			<label class="defineEntries" id="searchEntries" hx-trigger="change delay:0.1s" hx-get="/productChangeSearch" hx-target="#table" hx-swap="outerHTML">
-				<input type="search" placeholder="Search Name or Brand..." id="searchBar" name="searchBar" onkeyup="takeInput()">
+				<input type="text" placeholder="Search Name or Brand..." id="searchBar" name="searchBar" onkeyup="takeInput()">
 			</label>
 			<br/>
 			<div th:switch="${products}">
@@ -48,35 +48,6 @@
 					<div id="table" th:replace="user_product_table.html :: product">
 					
 					</div>
-					<table class="productTable">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th></th>
-								<th>Name</th>
-								<th>Brand</th>
-								<th>Qty. Avail.</th>
-								<th>Unit Price</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="product : ${products}">
-								<td th:text="${product.id}"></td> <!-- ID -->
-								<td><img th:alt="${product.id}" th:src="${product.image}"></td> <!-- Photo -->
-								<td th:text="${product.name}"></td> <!-- Name -->
-								<td th:text="${product.brand}"></td> <!-- Brand -->
-								<td th:text="${product.qtyAvailable}"></td> <!-- Qty -->
-								<td th:text="${product.price}"></td> <!-- Price -->
-								<td><input type="number" name="qtyToCart" id="qtyToCart" min="1"/></td> <!-- Quantity -->
-								<td> <!-- Add to Cart -->
-									<a href="/cart">
-										<img src="/images/add-to-cart.png" alt="Add to Cart" height="30" />
-									</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</div>	

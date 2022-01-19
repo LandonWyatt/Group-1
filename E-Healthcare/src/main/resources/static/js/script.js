@@ -23,3 +23,12 @@ function showEntries() {
 	  body: JSON.stringify(data)
 	})
 }
+
+/* Activation Script */
+function activate(sel) {
+	console.log("check changed: " + sel.value);
+	fetch("/productActive/" + sel.value, {
+	  method: "PUT",
+	  headers: {'Content-Type': 'application/json'}
+	})
+}

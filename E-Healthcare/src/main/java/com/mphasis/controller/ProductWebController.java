@@ -23,10 +23,14 @@ public class ProductWebController {
 	private String searchStr = "";
 	
 	@GetMapping("/product")
-	public ModelAndView getProduct(Map<String, Object> model) {
+	public ModelAndView getProducts(Map<String, Object> model) {
 		System.out.println("/product mapping visited");
+		List<Product> productsList;
 		
-		List<Product> productsList = productController.getAllProductSearch(searchStr);
+		if(searchStr == "") // if there is no value in search bar, simply retrieve entire table
+			productsList = productController.getAllProducts();
+		else
+			productsList = productController.getAllProductSearch(searchStr);
 		
 		model.put("numChosen", numEntries);
 		model.put("products", productsList);
@@ -36,7 +40,12 @@ public class ProductWebController {
 	
 	@GetMapping("/productChangeEntries")
 	public ModelAndView getProductChangeEntries(Map<String, Object> model) {
-		List<Product> productsList = productController.getAllProductSearch(searchStr);
+		List<Product> productsList;
+		
+		if(searchStr == "") // if there is no value in search bar, simply retrieve entire table
+			productsList = productController.getAllProducts();
+		else
+			productsList = productController.getAllProductSearch(searchStr);
 		
 		model.put("numChosen", numEntries);
 		model.put("products", productsList);
@@ -52,7 +61,12 @@ public class ProductWebController {
 	
 	@GetMapping("/productChangeSearch")
 	public ModelAndView getProductChangeSearch(Map<String, Object> model) {
-		List<Product> productsList = productController.getAllProductSearch(searchStr);
+		List<Product> productsList;
+		
+		if(searchStr == "") // if there is no value in search bar, simply retrieve entire table
+			productsList = productController.getAllProducts();
+		else
+			productsList = productController.getAllProductSearch(searchStr);
 		
 		model.put("numChosen", numEntries);
 		model.put("products", productsList);

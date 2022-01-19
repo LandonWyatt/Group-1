@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<script src="https://unpkg.com/htmx.org@1.6.1"></script>
 	</head>
 	<body>
 		<div th:fragment="product" id="table">
 			<table class="productTable">
 				<thead>
 					<tr>
-						<th>ID</th>
+						<th>ID<a id="sortButton"><img src="/images/sort.png"/></a></th>
 						<th></th>
-						<th>Name</th>
-						<th>Brand</th>
-						<th>Qty. Avail.</th>
-						<th>Unit Price</th>
+						<th>Name<a id="sortButton"><img src="/images/sort.png"/></a></th>
+						<th>Brand<a id="sortButton"><img src="/images/sort.png"/></a></th>
+						<th>Qty. Avail.<a id="sortButton"><img src="/images/sort.png"/></a></th>
+						<th>Unit Price<a id="sortButton"><img src="/images/sort.png"/></a></th>
 						<th>Activate</th>
 					</tr>
 				</thead>
@@ -27,7 +26,7 @@
 						<td th:text="${product.qtyAvailable}"></td> <!-- Qty -->
 						<td th:text="${product.price}"></td> <!-- Price -->
 						<td> <!-- Activate -->
-							<input type="checkbox" name="toggle" th:checked="${product.activate}">
+							<input th:onchange="activate(this)" th:value="${product.id}" type="checkbox" name="toggle" th:checked="${product.activate}">
 						</td>
 						<td> <!-- Edit -->
 							<a href="#" >

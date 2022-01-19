@@ -38,6 +38,11 @@ input[type=number] {
 	width: 50px;
 }
 
+#sortButton img {
+	height: 20px;
+	width: 20px;
+}
+
 #addProductButton {
 	padding: 10px 0px 10px;
 	border: none;
