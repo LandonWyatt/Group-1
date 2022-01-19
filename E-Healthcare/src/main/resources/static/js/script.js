@@ -26,9 +26,21 @@ function showEntries() {
 
 /* Activation Script */
 function activate(sel) {
-	console.log("check changed: " + sel.value);
 	fetch("/productActive/" + sel.value, {
 	  method: "PUT",
 	  headers: {'Content-Type': 'application/json'}
 	})
 }
+
+/* Sorting Script */
+function sort(sortOrder) {
+	fetch("/productSearch/" + sortOrder, {
+	  method: "POST",
+	  headers: {'Content-Type': 'application/json'}
+	})
+}
+
+
+
+
+

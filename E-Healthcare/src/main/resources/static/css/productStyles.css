@@ -30,17 +30,21 @@ h2#editHeader {
 	border: 1px solid lightgrey;
 	padding: 5px;
 }
+.productTable th {
+	text-align: left;
+}
 .productTable img {
 	max-height: 120px;
 }
 
-input[type=number] {
-	width: 50px;
+#sortButton img {
+	height: 15px;
+	float: right;
+	cursor: pointer;
 }
 
-#sortButton img {
-	height: 20px;
-	width: 20px;
+input[type=number] {
+	width: 50px;
 }
 
 #addProductButton {

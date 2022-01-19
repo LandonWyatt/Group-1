@@ -23,30 +23,31 @@
 			<h2 id="editHeader">
 				Update Product
 			</h2>
-			<form action="#">
+			<form action="#" th:action="@{/save_update}" th:object="${product}" method="post">
 				<table id="editProduct">
 					<tr>
 						<td id="editTag">ID:</td> <!-- ID -->
-						<td><input type="text" name="" readonly></td>
+						<td><input type="text" th:field="*{id}" readonly></td>
 					</tr>
 					<tr>
 						<td id="editTag">Name:</td> <!-- Name -->
-						<td><input type="text"></td>
+						<td><input type="text" th:field="*{name}"></td>
 					</tr>
 					<tr>
 						<td id="editTag">Brand:</td> <!-- Brand -->
-						<td><input type="text"></td>
+						<td><input type="text" th:field="*{brand}"></td>
 					</tr>
 					<tr>	
 						<td id="editTag">Qty. Available:</td> <!-- Qty -->
-						<td><input type="number" min="0"></td>
+						<td><input type="number" min="0" th:field="*{qtyAvailable}"></td>
 					</tr>
 					<tr>	
 						<td id="editTag">Price ($):</td> <!-- Price -->
-						<td><input type="text"></td>
+						<td><input type="text" th:field="*{price}"></td>
+						<td><input type="text" th:field="*{image}" hidden="hidden"></td> <!-- Sets original value to new value -->
 					</tr>
 					<tr>
-						<td><button type="submit" id="deleteButton">Delete</button></td>
+						<td><button type="submit" id="deleteButton" disabled>Delete</button></td>
 						<td><button type="submit" id="editButton">Update</button></td>
 					</tr>
 				</table>
