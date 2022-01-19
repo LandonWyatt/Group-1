@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mphasis.model.Product;
-import com.mphasis.service.ProductService;
 
 @Controller
 public class ProductWebController {
@@ -27,35 +27,40 @@ public class ProductWebController {
 	private String searchStr = "";
 	private List<Product> cartList = new ArrayList<>();
 	
+	// Testing value, determine based on user
+	private boolean admin = true;
+	
 	@GetMapping("/product")
 	public ModelAndView getProducts(Map<String, Object> model) {
 		System.out.println("/product mapping visited");
-		List<Product> productsList;
+		List<Product> productsList = productController.getAllProductSearch(searchStr);
 		
-		if(searchStr == "") // if there is no value in search bar, simply retrieve entire table
-			productsList = productController.getAllProducts();
-		else
-			productsList = productController.getAllProductSearch(searchStr);
+		if(!admin)
+			productsList = productsList.stream().filter((Product prod) -> {return prod.isActivate();}).collect(Collectors.toList());
 		
 		model.put("numChosen", numEntries);
 		model.put("products", productsList);
 		// user_product or admin_product needs to be determined and decide which to return
-		return new ModelAndView("admin_product");
+		if(admin)
+			return new ModelAndView("admin_product");
+		else
+			return new ModelAndView("user_product");
 	}
 	
 	@GetMapping("/productChangeEntries")
 	public ModelAndView getProductChangeEntries(Map<String, Object> model) {
-		List<Product> productsList;
+		List<Product> productsList = productController.getAllProductSearch(searchStr);
 		
-		if(searchStr == "") // if there is no value in search bar, simply retrieve entire table
-			productsList = productController.getAllProducts();
-		else
-			productsList = productController.getAllProductSearch(searchStr);
+		if(!admin)
+			productsList = productsList.stream().filter((Product prod) -> {return prod.isActivate();}).collect(Collectors.toList());
 		
 		model.put("numChosen", numEntries);
 		model.put("products", productsList);
 		// user_product or admin_product needs to be determined and decide which to return
-		return new ModelAndView("admin_product_table.html :: product");
+		if(admin)
+			return new ModelAndView("admin_product_table.html :: product");
+		else
+			return new ModelAndView("user_product_table.html :: product");
 	}
 	
 	@PostMapping("/productChangeEntries")
@@ -66,17 +71,18 @@ public class ProductWebController {
 	
 	@GetMapping("/productChangeSearch")
 	public ModelAndView getProductChangeSearch(Map<String, Object> model) {
-		List<Product> productsList;
+		List<Product> productsList = productController.getAllProductSearch(searchStr);
 		
-		if(searchStr == "") // if there is no value in search bar, simply retrieve entire table
-			productsList = productController.getAllProducts();
-		else
-			productsList = productController.getAllProductSearch(searchStr);
+		if(!admin)
+			productsList = productsList.stream().filter((Product prod) -> {return prod.isActivate();}).collect(Collectors.toList());
 		
 		model.put("numChosen", numEntries);
 		model.put("products", productsList);
 		// user_product or admin_product needs to be determined and decide which to return
-		return new ModelAndView("admin_product_table.html :: product");
+		if(admin)
+			return new ModelAndView("admin_product_table.html :: product");
+		else
+			return new ModelAndView("user_product_table.html :: product");
 	}
 	
 	@PostMapping("/productChangeSearch")
@@ -98,6 +104,24 @@ public class ProductWebController {
 		return "redirect:/product";
 	}
 	
+	@GetMapping("/update_product/{id}")
+	public String updateProduct(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("product",productController.getProduct(id));
+		return "update_product";
+	}
+	
+	@PostMapping("/save_update")
+	public String saveUpdateProduct(@ModelAttribute("product") Product product) {
+		productController.updateProduct(product, product.getId());
+		return "redirect:/product";
+	}
+	
+	/* Not implemented yet in page */
+	@PostMapping("/delete_products/{id}")
+	public String deleteProduct(@PathVariable("id") Long id) {
+		productController.deleteProduct(id);
+		return "redirect:/product";
+	}
 
 	@GetMapping("/cart")
 	public ModelAndView getCart(Map<String, Object> model) {
@@ -107,7 +131,7 @@ public class ProductWebController {
 	
 	@GetMapping("/save_to_cart/{id}")
 	public String saveToCart(Map<String, Object> model, @PathVariable("id") Long id) {
-		Product p = productController.getProduct(id).get();
+		Product p = productController.getProduct(id);
 		if(!cartList.contains(p)) {
 			cartList.add(p);
 		}
@@ -121,7 +145,7 @@ public class ProductWebController {
 	
 	@GetMapping("/remove_from_cart/{id}")
 	public String removeFromCart(Map<String, Object> model, @PathVariable("id") Long id) {
-		Product p = productController.getProduct(id).get();
+		Product p = productController.getProduct(id);
 		Iterator<Product> iter = cartList.iterator();
 		while(iter.hasNext()) {
 			Product item = iter.next();
