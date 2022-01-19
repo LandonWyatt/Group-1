@@ -25,19 +25,6 @@ public class WebController {
 		return "about";
 	}
 	
-	@GetMapping("/cart")
-	public ModelAndView getCart(Map<String, Object> model) {
-		List<Product> productsList = productController.getAllProducts();
-		model.put("products", productsList);
-		return new ModelAndView("cart");
-	}
-	
-	@PostMapping("/save_to_cart")
-	public String saveToCart() {
-		
-		return "redirect:/cart";
-	}
-	
 	@GetMapping("/contact")
 	public String getContact() {
 		return "contact";

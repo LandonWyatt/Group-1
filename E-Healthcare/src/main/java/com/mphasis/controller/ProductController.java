@@ -1,6 +1,7 @@
 package com.mphasis.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,11 @@ public class ProductController {
 	@PostMapping("/products")
 	public void addProduct(@RequestBody Product product) {
 		productService.addProduct(product);
+	}
+	
+	@GetMapping("/products/{id}")
+	public Optional<Product> getProduct(@PathVariable("id") Long id){
+		return productService.getProduct(id);
 	}
 
 }

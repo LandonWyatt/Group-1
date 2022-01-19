@@ -15,6 +15,7 @@
 				<li><a th:href="@{/product}">View Products</a></li>
 			</ul>
 			<ul class="nav-right">
+				<li><a th:href="@{/cart}">Cart</a></li>
 				<li><a th:href="@{/login}">Login</a></li>
 				<li><a th:href="@{/signup}">Sign Up</a></li>
 			</ul>
@@ -49,7 +50,7 @@
 						<td th:text="${product.price * 1}"></td>
 						<td>
 							<a href="#"><img src="/images/refresh.png" alt="Refresh" height="30" /></a>
-							<a href="#"><img src="/images/delete.png" alt="Delete" height="30" /></a>
+							<a th:href="@{/remove_from_cart/{id}(id=${product.id})}"><img src="/images/delete.png" alt="Delete" height="30" /></a>
 						</td>
 					</tr>
 					<tr id="cartManagement">
