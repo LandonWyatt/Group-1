@@ -6,7 +6,7 @@
 	<body>
 		<div th:fragment="product" id="table">
 			<table class="productTable">
-				<thead  hx-trigger="click delay:0.1s from:#sortButton" hx-get="/productChangeEntries" hx-target="#table" hx-swap="outerHTML">
+				<thead hx-trigger="click delay:0.1s from:#sortButton" hx-get="/productChangeEntries" hx-target="#table" hx-swap="outerHTML">
 					<tr>
 						<th>ID<a onclick="sort('id')" id="sortButton"><img src="/images/sort.png"/></a></th>
 						<th></th>

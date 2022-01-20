@@ -20,7 +20,7 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
-	private String sortedSearch = "id";
+	private String sortedSearch = "";
 	
 	@GetMapping("/products")
 	public List<Product> getAllProducts() {
@@ -37,19 +37,19 @@ public class ProductController {
 		List<Product> sortedList = new ArrayList<>();
 		switch(sortedSearch) {
 			case "id":
-				productService.getAllProductSearch(str).stream().sorted((prod1, prod2) -> prod2.getId().compareTo(prod1.getId())).forEach(sortedList::add);
+				productService.getAllProductSearch(str).stream().sorted((prod1, prod2) -> prod1.getId().compareTo(prod2.getId())).forEach(sortedList::add);
 				break;
 			case "name":
-				productService.getAllProductSearch(str).stream().sorted((prod1, prod2) -> prod2.getName().compareTo(prod1.getName())).forEach(sortedList::add);
+				productService.getAllProductSearch(str).stream().sorted((prod1, prod2) -> prod1.getName().compareTo(prod2.getName())).forEach(sortedList::add);
 				break;
 			case "brand":
-				productService.getAllProductSearch(str).stream().sorted((prod1, prod2) -> prod2.getBrand().compareTo(prod1.getBrand())).forEach(sortedList::add);
+				productService.getAllProductSearch(str).stream().sorted((prod1, prod2) -> prod1.getBrand().compareTo(prod2.getBrand())).forEach(sortedList::add);
 				break;
 			case "qty":
-				productService.getAllProductSearch(str).stream().sorted((prod1, prod2) -> ((Long)prod2.getQtyAvailable()).compareTo((Long)prod1.getQtyAvailable())).forEach(sortedList::add);
+				productService.getAllProductSearch(str).stream().sorted((prod1, prod2) -> ((Long)prod1.getQtyAvailable()).compareTo((Long)prod2.getQtyAvailable())).forEach(sortedList::add);
 				break;
 			case "price":
-				productService.getAllProductSearch(str).stream().sorted((prod1, prod2) -> ((Double)prod2.getPrice()).compareTo((Double)prod1.getPrice())).forEach(sortedList::add);
+				productService.getAllProductSearch(str).stream().sorted((prod1, prod2) -> ((Double)prod1.getPrice()).compareTo((Double)prod2.getPrice())).forEach(sortedList::add);
 				break;
 			default:
 				productService.getAllProductSearch(str).stream().forEach(sortedList::add);
