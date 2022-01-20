@@ -40,13 +40,14 @@ function sort(sortOrder) {
 	})
 }
 
-
+/* Cart update Script */
 function qtyInput(sel) {
 	console.log("test");
 	console.log(sel.name);
-	var cartQty = document.getElementById("qtyInCart").innerHTML;
+	var qtyToCart = document.getElementById("qtyToCart").value;
+	console.log(qtyToCart);
 	
-	let data = {qtyInfo: cartQty, id: sel.name};
+	let data = {qtyInfo: qtyToCart, id: sel.name};
 	
 	fetch("/update_cart", {
 	  method: "POST",

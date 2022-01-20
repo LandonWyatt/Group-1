@@ -39,20 +39,20 @@
 					<tr id="cartProduct" th:each="product : ${products}">
 						<td>
 							<div id="productInCart">
-								<img th:alt="${product.id}" th:src="${product.image}">
+								<img th:alt="${product.key.id}" th:src="${product.key.image}">
 								<div>
-									<h3 th:text="${product.name}"></h3> <!-- Name -->
-									<p style="display:inline">Brand: <p style="display:inline" th:text="${product.brand}"></p> <!-- Brand -->
-									<p>Description: <p style="display:inline" th:text="${product.description}"></p> <!-- Description -->
+									<h3 th:text="${product.key.name}"></h3> <!-- Name -->
+									<p style="display:inline">Brand: <p style="display:inline" th:text="${product.key.brand}"></p> <!-- Brand -->
+									<p>Description: <p style="display:inline" th:text="${product.key.description}"></p> <!-- Description -->
 								</div>
 							</div>
 						</td>
-						<td th:text="${product.price}"></td>
-						<td id="qtyInCart" th:text="3"></td>
-						<td th:text="${subTotal}"></td>
+						<td th:text="${product.key.price}"></td>
+						<td id="qtyInCart" th:text="${product.value}"></td>
+						<td th:text="${product.key.price} * ${product.value}"></td>
 						<td>
 							<!-- <a><img id="refresh" src="/images/refresh.png" alt="Refresh" height="30"/></a> -->
-							<a th:href="@{/remove_from_cart/{id}(id=${product.id})}"><img src="/images/delete.png" alt="Delete" height="30" /></a>
+							<a th:href="@{/remove_from_cart/{id}(id=${product.key.id})}"><img src="/images/delete.png" alt="Delete" height="30" /></a>
 						</td>
 					</tr>
 					<tr id="cartManagement">

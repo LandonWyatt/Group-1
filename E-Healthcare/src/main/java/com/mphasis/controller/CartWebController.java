@@ -2,6 +2,7 @@ package com.mphasis.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -21,29 +22,35 @@ public class CartWebController {
 	
 	@Autowired
 	private ProductController productController;
-	private List<Product> cartList = Collections.synchronizedList(new ArrayList<>());
+	private Map<Product, Double> cartMap = new HashMap<Product, Double>();
+	private List<Product> cartKeyList = Collections.synchronizedList(new ArrayList<>());
+	private List<Double> cartQtyList = Collections.synchronizedList(new ArrayList<>());
 	private String qtyInfo = "";
 	private double select = 10;
 	
 	@GetMapping("/cart")
 	public ModelAndView getCart(Map<String, Object> model) {
 		model.put("subTotal", select);
-		model.put("products", cartList);
+		model.put("products", cartMap);
+//		model.put("products", cartKeyList);
+//		model.put("quantities", cartQtyList);
 		return new ModelAndView("cart");
 	}
 	
 	@GetMapping("/save_to_cart/{id}")
 	public String saveToCart(Map<String, Object> model, @PathVariable("id") Long id) {
 		Product p = productController.getProduct(id);
-		if(cartList.isEmpty()) {
-			cartList.add(p);
+		if(cartKeyList.isEmpty()) {
+			cartMap.put(p, 3.0);
+			cartKeyList = new ArrayList<>(cartMap.keySet());
+			cartQtyList = new ArrayList<>(cartMap.values());
 		}
 		else {
 			boolean inCart = false;
-			Iterator<Product> iter = cartList.iterator();
+			Iterator<Product> iter = cartKeyList.iterator();
 			while(iter.hasNext()) {
 				Product item = iter.next();
-				if(item.getId() == p.getId()) {
+				if(item.getId() == id) {
 					inCart = true;
 				}
 			}
@@ -51,25 +58,29 @@ public class CartWebController {
 				System.out.println("ADD ONE");
 			}
 			else {
-				cartList.add(p);
+				cartMap.put(p,1.0);
+				cartKeyList = new ArrayList<>(cartMap.keySet());
+				cartQtyList = new ArrayList<>(cartMap.values());
 			}
-			System.out.println(cartList.toString());
 		}
-		model.put("products", cartList);
+//		model.put("products", cartKeyList);
 		return "redirect:/cart";
 	}
 	
 	@GetMapping("/remove_from_cart/{id}")
 	public String removeFromCart(Map<String, Object> model, @PathVariable("id") Long id) {
-		Product p = productController.getProduct(id);
-		Iterator<Product> iter = cartList.iterator();
+		System.out.println(cartKeyList);
+		Iterator<Product> iter = cartKeyList.iterator();
 		while(iter.hasNext()) {
 			Product item = iter.next();
-			if(item.getId() == p.getId()) {
-				iter.remove();
+			if(item.getId() == id) {
+				cartMap.remove(item);
+				cartKeyList = new ArrayList<>(cartMap.keySet());
+				cartQtyList = new ArrayList<>(cartMap.values());
+				break;
 			}
 		}
-		model.put("products", cartList);
+//		model.put("products", cartKeyList);
 		return "redirect:/cart";
 	}
 	

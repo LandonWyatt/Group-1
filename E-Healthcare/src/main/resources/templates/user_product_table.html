@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<script src="https://unpkg.com/htmx.org@1.6.1"></script>
+		<script src="/js/script.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div th:fragment="product" id="table">
@@ -30,7 +31,7 @@
 						<td><input type="number" name="qtyToCart" id="qtyToCart" min="1"/></td> <!-- Quantity -->
 						<td> <!-- Add to Cart -->
 							<a th:href="@{/save_to_cart/{id}(id=${product.id})}">
-								<img src="/images/add-to-cart.png" alt="Add to Cart" height="30" th:onclick="qtyInput(this)" th:name="${product.id}"/>
+								<img src="/images/add-to-cart.png" alt="Add to Cart" height="30" /> <!-- th:onclick="qtyInput(this)" th:name="${product.id}" -->
 							</a>
 						</td>
 					</tr>
