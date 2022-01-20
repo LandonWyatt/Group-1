@@ -28,8 +28,13 @@ public class WebController {
 	}
 	
 	@GetMapping("/logout")
-	public String getlogout() {
+	public String getLogout() {
 		return "index";
+	}
+	
+	@GetMapping("/checkout")
+	public String getCheckout() {
+		return "checkout";
 	}
 	
 	/*

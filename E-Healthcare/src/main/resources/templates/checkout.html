@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,14 +27,14 @@ document.getElementById('cardnumber').innerHTML=cardnumber;
 <div class="row">
  <div class="col-25">
     <div class="container1">
-     <img src="C:\Users\kirad\OneDrive\Desktop\buy.png" />
+     <img src="/images/buy.png" />
     </div>
   </div>
 
 
   <div class="col-100">
     <div class="container">
-      <form METHO="GET" action="thanks.html">
+      <form METHOD="GET" action="thanks.html">
       
         <div class="row">
           <div class="col-50">
@@ -92,7 +92,7 @@ document.getElementById('cardnumber').innerHTML=cardnumber;
           <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
         </label>
 		<!-- <a href="thanks.html"> -->
-       <button class="btn"><a th:href="@{/thanks}">Continue to checkout</button>
+       <button class="btn"><a th:href="@{/checkoutReceipt}"></a>Continue to checkout</button>
 	   <!-- <input type="submit" value="Continue to checkout" class="btn"> -->
       </form>
     </div>
