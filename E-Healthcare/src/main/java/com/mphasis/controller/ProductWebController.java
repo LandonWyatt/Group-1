@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +28,7 @@ public class ProductWebController {
 	private String searchStr = "";
 	
 	// Testing value, determine based on user
-	private boolean admin = false;
+	private boolean admin = true;
 	
 	@GetMapping("/product")
 	public ModelAndView getProducts(Map<String, Object> model) {
@@ -96,7 +99,10 @@ public class ProductWebController {
 	}
 	
 	@PostMapping("/save_product")
-	public String saveProduct(@ModelAttribute("product") Product product) {
+	public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
+		if(result.hasErrors())
+			return "add_product";
+		
 		productController.addProduct(product);
 		return "redirect:/product";
 	}
@@ -108,14 +114,17 @@ public class ProductWebController {
 	}
 	
 	@PostMapping("/save_update")
-	public String saveUpdateProduct(@ModelAttribute("product") Product product) {
+	public String saveUpdateProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
+		if(result.hasErrors())
+			return "update_product";
+		
 		productController.updateProduct(product, product.getId());
 		return "redirect:/product";
 	}
 	
-	/* Not implemented yet in page */
-	@PostMapping("/delete_products/{id}")
+	@PostMapping("/delete_product/{id}")
 	public String deleteProduct(@PathVariable("id") Long id) {
+		System.out.println("Delete visited");
 		productController.deleteProduct(id);
 		return "redirect:/product";
 	}
