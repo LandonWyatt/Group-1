@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,7 +7,7 @@
     <title>Document</title>
 	<!-- <script src="/js/thanks.js"></script> -->
 	<link rel="stylesheet" href="/css/styles.css">
-	<!-- <link rel="stylesheet" href="/css/thanks.css.css"> -->
+	<link rel="stylesheet" href="/css/thanksStyle.css">
 	
 	
 
@@ -15,21 +15,16 @@
 var dt = new Date();
 document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (("0"+dt.getDate()).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()+1).slice(-2)) +":"+ (("0"+dt.getMinutes()+1).slice(-2));
 
-		<!-- str = str.replace(/\d(?=\d{4})/g, "*"); -->
 </script>
 
 
   </head>
 
-</html>
-
-
   <body>
     <div class="main">
       <div class="order-card">
         <div class="img-div">
-        <!-- <img src="https://res.cloudinary.com/dyvivj6d5/image/upload/v1633008237/illustration-hero_hehadt.svg" alt="" /> -->
-		<img src="C:\Users\kirad\OneDrive\Desktop\orderSummary1.jpg" alt=""/>
+		<img src="/images/orderSummary1.jpg" alt=""/>
         </div>
 
         <div class="content-div">
@@ -40,61 +35,33 @@ document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-
           </p>
 
           <div class="plan-div">
-            <!-- <div class="plan-about"> -->
-              <!-- <div class="music-icon">
-                <img src="https://res.cloudinary.com/dyvivj6d5/image/upload/v1633008286/icon-music_sapdxr.svg" alt="" />
-				
-              </div> -->
-
-             <!--  <div>
-                <div class="plan-name">???</div>
-
-                <div class="plan-price">???</div>
-              </div>
-            </div>
-
-            <div class="change-div">???</div>
-          </div> -->
 		  <div class="ticket">
-            <!-- <img src="./logo.png" alt="Logo"> -->
             <p class="centered">
 			<p style="font-family: cursive;font-size:14px">HealthCare</b> Solutions</br>2002 Hicombe Boulevard<br>Houston Texas 77030<br>843-433-9898</p>
 				
               
-				<p>Email : <h3 th:text=${checkout.email}"></h3></p>
-				<p>Credit card # : <h3 th:text=${checkout.cardnumber}"></h3></p>
+				<p>Email : <h3></h3></p>
+				<p>Credit card # : <h3></h3></p>
 				<p>Date : <h3 id='datetime'><h3></p>
 		        <table class="center">
                 <thead>
                     <tr>
+                    	<th class="name">Items</th>
                         <th class="quantity">Q.</th>
-                        <th class="name">Items</th>
                         <th class="price">$$</th>
 						<th class="subTotal">sub$$</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="quantity">1.00</td>
-                        <td class="name"><h3 th:text="${product.name}">item1</td>
-                        <td class="price">$</td>
-						<td class="price">$</td>
-						
+                    <tr id="cartProduct" th:each="product : ${products}">
+                        <td class="name"><h3 th:text="${product.key.name}"></h3></td>
+                        <td class="quantity" th:text="${product.value}"></td>
+                        <td class="price" th:text="${'$' + product.key.price}"></td>
+						<td class="price" th:text="${'$' + product.key.price * product.value}"></td>
                     </tr>
                     <tr>
-                        <td class="quantity">2.00</td>
-                        <td class="name">item 2</td>
-                        <td class="price">$</td>
-                    </tr>
-                    <tr>
-                        <td class="quantity">1.00</td>
-                        <td class="name">item 3</td>
-                        <td class="price">$</td>
-                    </tr>
-                    <tr>
-                        <td class="quantity"></td>
                         <td class="name">TOTAL</td>
-                        <td class="price">$$$</td>
+                        <td class="price" th:text="${'$' + totalSum}"></td>
                     </tr>
                 </tbody>
             </table>
@@ -108,12 +75,10 @@ document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-
             <div class="proceed-btn">
               <button>Log Out</button>
             </div>
-
-            <!-- <div class="cancel-btn"> -->
-              <!-- <button>Cancel Order</button>
-            </div> -->
           
         </div>
       </div>
     </div>
   </body>
+</html>
+ 

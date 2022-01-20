@@ -84,6 +84,13 @@ public class CartWebController {
 		return "redirect:/cart";
 	}
 	
+	@GetMapping("/checkoutReceipt")
+	public String checkoutReceipt(Map<String, Object> model) {
+		model.put("totalSum", totalSum);
+		model.put("products", cartMap);
+		return "thanks";
+	}
+	
 //	@PostMapping("/update_cart")
 //	public ModelAndView updateCart(Map<String, Object> model, @RequestBody Map<String, String> data){
 //		qtyInfo = data.get("qtyInfo");

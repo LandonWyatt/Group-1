@@ -34,7 +34,7 @@ document.getElementById('cardnumber').innerHTML=cardnumber;
 
   <div class="col-100">
     <div class="container">
-      <form METHOD="GET" action="thanks.html">
+      <form METHOD="GET" action="/checkoutReceipt">
       
         <div class="row">
           <div class="col-50">
@@ -92,7 +92,7 @@ document.getElementById('cardnumber').innerHTML=cardnumber;
           <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
         </label>
 		<!-- <a href="thanks.html"> -->
-       <button class="btn"><a th:href="@{/checkoutReceipt}"></a>Continue to checkout</button>
+       <button class="btn">Continue to checkout</button>
 	   <!-- <input type="submit" value="Continue to checkout" class="btn"> -->
       </form>
     </div>
