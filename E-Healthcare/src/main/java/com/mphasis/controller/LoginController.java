@@ -29,7 +29,7 @@ public class LoginController {
 	if(firstName != null) { 
 		
 		model.addAttribute("firstName", firstName);
-		return "user_product";
+		return "redirect:/product";
 	}
 		
 	return "login";
