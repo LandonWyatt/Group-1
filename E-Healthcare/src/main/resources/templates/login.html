@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Login</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="stylesheet" href="/css/loginStyles.css">
+</head>
+<body>
+	<div class="nav">
+		<ul class="nav-left">
+			<li><a th:href="@{/}">Main Page</a></li>
+			<li><a th:href="@{/about}">About</a></li>
+			<li><a th:href="@{/contact}">Contact</a></li>
+			<li><a th:href="@{/product}">View Products</a></li>
+		</ul>
+		<ul class="nav-right">
+			<li><a th:href="@{/login}">Login</a></li>
+			<li><a th:href="@{/signup}">Sign Up</a></li>
+		</ul>
+	</div>
+
+	<main>
+		<form>
+			<div class="container">
+				<h1 id="loginHeader1">Login</h1>
+				<div id="loginInputs">
+					<label>Email:</label>
+					<input id="email" type="email" placeholder="Enter email.." name="useremail" required><br>
+					<label>Password:</label>
+					<input id="password" type="password" placeholder="Enter password.." name="password" required><br><br>
+				</div>
+				<button id=loginButton type="submit">Login</button><br>
+				<h2 id="loginHeader2">New user? <a th:href="@{/signup}"> Register Here</a></h2>
+			</div>
+		</form>
+	</main>
+</body>
+<footer class="footer-distributed" >
+
+			<div class="footer-left">
+          
+				<h3>About<span>Medicine</span></h3>
+
+				<p class="footer-links">
+					<a th:href="@{/}">Home</a>
+					
+					
+					|
+					<a th:href="@{/about}">About</a>
+					|
+					<a th:href="@{/contact}">Contact</a>
+				</p>
+
+				<p class="footer-company-name">© 2022 HealthCare Solutions Pvt. Ltd.</p>
+			</div>
+
+			<div class="footer-center">
+				<div>
+					<i class="fa fa-map-marker"></i>
+					  <p><span>2002 Hicombe Boulevard</span>
+						Houston Texas 77030 </p>
+				</div>
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>843-433-9898</p>
+				</div>
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@healthcare.com">support@healthcare.com</a></p>
+				</div>
+			</div>
+			<div class="footer-right">
+				<p class="footer-company-about">
+					<span>About the company</span>
+					We are ddelivering and distribution of high-quality manufactured medications at the lowest price.  </p>
+				<div class="footer-icons">
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-instagram"></i></a>
+					<a href="#"><i class="fa fa-linkedin"></i></a>
+					<a href="#"><i class="fa fa-youtube"></i></a>
+				</div>
+			</div>
+		</footer>
+		
+
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="/js/headroom.min.js"></script>
+	<script src="/js/jQuery.headroom.min.js"></script>
+	<script src="/js/template.js"></script>
+</html>

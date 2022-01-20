@@ -1,0 +1,129 @@
+/* user_product.html/admin_product.html */
+.products {
+	width: 80%; /* needs adjusting to fit overall window */
+	margin-left: auto;
+	margin-right: auto;
+}
+h2#editHeader {
+	text-align: center;
+}
+
+.defineEntries {
+	padding-bottom: 5px;
+}
+#showEntries {
+	float: left;
+}
+#searchEntries {
+	float: right;
+}
+
+.productTable {
+	border-collapse: collapse;
+	width: 100%; /* needs adjusting */
+	text-align: center;
+}
+.productTable thead {
+	border-bottom: 2px solid lightgrey;
+}
+.productTable th, td {
+	border: 1px solid lightgrey;
+	padding: 5px;
+}
+.productTable th {
+	text-align: left;
+}
+.productTable img {
+	max-height: 120px;
+}
+
+#sortButton img {
+	height: 15px;
+	float: right;
+	cursor: pointer;
+}
+
+input[type=number] {
+	width: 50px;
+}
+
+#addProductButton {
+	padding: 10px 0px 10px;
+	border: none;
+}
+
+/* update_product.html */
+#editProduct {
+	border-collapse: collapse;
+	width: auto; /* needs adjusting */
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+#editProduct td {
+	border: none;
+}
+#editTag {
+	float: right;
+}
+#editButton {
+	float: right;
+}
+
+/* cart.html */
+#productInCart img {
+	float: left;
+}
+#productInCart div {
+	text-align: left;
+}
+
+.cartTable {
+	border-collapse: collapse;
+	width: 100%; /* needs adjusting */
+	text-align: center;
+}
+.cartTable thead {
+	border-bottom: 5px solid lightgrey;
+}
+.cartTable thead th {
+	padding-bottom: 5px;
+}
+.cartTable img {
+	max-height: 120px;
+}
+
+#cartProduct td {
+	border: none;
+	padding: 5px;
+	border-bottom: 2px solid lightgrey;
+}
+#cartManagement td {
+	border: none;
+	padding: 10px 5px 5px;
+	border-top: 5px solid lightgrey;
+}
+#continueShoppingButton {
+	float: left;
+	background-color: orange;
+	border: none;
+	color: white;
+	cursor: pointer;
+	font-size: 20px;
+	text-align: center;
+	/*text-decoration: none;*/
+	padding: 6px 10px 6px;
+	border-radius: 4px;
+}
+#checkoutButton {
+	float: center;
+	background-color: green;
+	border: none;
+	color: white;
+	cursor: pointer;
+	font-size: 20px;
+	text-align: center;
+	text-decoration: none;
+	padding: 6px 10px 6px;
+	border-radius: 4px;
+}

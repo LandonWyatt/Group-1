@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>Medicare - Product Management</title>
+		<link rel="stylesheet" href="/css/styles.css">
+		<link rel="stylesheet" href="/css/productStyles.css">
+		<script src="/js/script.js" type="text/javascript"></script>
+		<script src="https://unpkg.com/htmx.org@1.6.1"></script>
+	</head>
+	<body>
+		<div class="nav">
+			<ul class="nav-left">
+				<li><a th:href="@{/}">Main Page</a></li>
+				<li><a th:href="@{/about}">About</a></li>
+				<li><a th:href="@{/contact}">Contact</a></li>
+				<li><a th:href="@{/product}">View Products</a></li>
+			</ul>
+			<ul class="nav-right">
+				<li><a th:href="@{/login}">Login</a></li>
+				<li><a th:href="@{/signup}">Sign Up</a></li>
+			</ul>
+		</div>
+		<div class="products">
+			<h2>
+				Available Products
+			</h2>
+			<label class="numEntries" hx-trigger="change delay:0.1s" hx-get="/productChangeEntries" hx-target="#table" hx-swap="outerHTML">
+				Show 
+					<select onchange="showEntries()" name="numEntries" id="numEntries">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+						<option value="40">40</option>
+						<option value="50">50</option>
+					</select>
+				entries
+			</label>
+			<label class="defineEntries" id="searchEntries" hx-trigger="change delay:0.1s" hx-get="/productChangeSearch" hx-target="#table" hx-swap="outerHTML">
+				<input type="text" placeholder="Search Name or Brand..." id="searchBar" name="searchBar" onkeyup="takeInput()">
+			</label>
+			<br/>
+			<div th:switch="${products}">
+				<h2 th:case="null">No products found.</h2>
+				<div th:case="*">
+					<div id="table" th:replace="admin_product_table.html :: product">
+					
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/contactStyles.css">
+<link rel="stylesheet" href="/css/styles.css">
+
+
+<body>
+	<div class="nav">
+		<ul class="nav-left">
+			<li><a th:href="@{/}">Main Page</a></li>
+			<li><a th:href="@{/about}">About</a></li>
+			<li><a th:href="@{/contact}">Contact</a></li>
+			<li><a th:href="@{/product}">View Products</a></li>
+		</ul>
+		<ul class="nav-right">
+			<li><a th:href="@{/login}">Login</a></li>
+			<li><a th:href="@{/signup}">Sign Up</a></li>
+		</ul>
+	</div>
+
+<div class="container">
+  <div style="text-align:center">
+    <h2>Contact Us</h2>
+    <p style="font: 16px/1.6 Arial, sans-serif">
+We are always ready to assist you. We value every customer and we know what long-term relations are.
+If you happen to have any question please contact our customer care specialists. You will receive a response for sure.
+Please use the form below to receive a quick reply. </p>
+  </div>
+  <div class="row">
+    <div class="column">
+      <img src="images/img3.png" style="width:100%;height:85%">
+    </div>
+    <div class="column">
+      <form action="/action_page.php">
+        <label for="fname">Name:</label>
+        <input type="text" id="fname" name="name" placeholder="Your name.." required>
+        <label for="lname">E-mail:</label>
+        <input type="email" id="lname" name="email" placeholder="abc@gmail.com" required>
+        <label for="country">Subject:</label>
+        <select id="country" name="country" required>
+		  <option value="opt" selected disabled>------------</option>
+          <option value="opt1">Questions regarding medicine</option>
+          <option value="opt2">Reprocess my credit card</option>
+          <option value="opt3">Did not receive my order</option>
+		  <option value="opt4">Cancel order</option>
+          <option value="opt5">Order status</option>
+          <option value="opt6">Wrong shipping address</option>
+		  <option value="opt7">Shipping delay</option>
+          <option value="opt8">Recieved no confirmation</option>
+          <option value="opt9">Other</option>
+		  
+        </select>
+        <label for="subject">Message:</label>
+        <textarea id="subject" name="message" placeholder="Write something.." style="height:170px" required></textarea>
+        <button type="submit" value="Submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+	
+
+</body>
+	<footer class="footer-distributed" >
+
+			<div class="footer-left">
+          
+				<h3>About<span>Medicine</span></h3>
+
+				<p class="footer-links">
+					<a th:href="@{/}">Home</a>
+					
+					
+					|
+					<a th:href="@{/about}">About</a>
+					|
+					<a th:href="@{/contact}">Contact</a>
+				</p>
+
+				<p class="footer-company-name">© 2022 HealthCare Solutions Pvt. Ltd.</p>
+			</div>
+
+			<div class="footer-center">
+				<div>
+					<i class="fa fa-map-marker"></i>
+					  <p><span>2002 Hicombe Boulevard</span>
+						Houston Texas 77030 </p>
+				</div>
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>843-433-9898</p>
+				</div>
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@healthcare.com">support@healthcare.com</a></p>
+				</div>
+			</div>
+			<div class="footer-right">
+				<p class="footer-company-about">
+					<span>About the company</span>
+					We are ddelivering and distribution of high-quality manufactured medications at the lowest price.  </p>
+				<div class="footer-icons">
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-instagram"></i></a>
+					<a href="#"><i class="fa fa-linkedin"></i></a>
+					<a href="#"><i class="fa fa-youtube"></i></a>
+				</div>
+			</div>
+		</footer>
+		
+
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="/js/headroom.min.js"></script>
+	<script src="/js/jQuery.headroom.min.js"></script>
+	<script src="/js/template.js"></script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>Medicare - Update Product</title>
+		<link rel="stylesheet" href="/css/styles.css">
+		<link rel="stylesheet" href="/css/productStyles.css">
+	</head>
+	<body>
+		<div class="nav">
+			<ul class="nav-left">
+				<li><a th:href="@{/}">Main Page</a></li>
+				<li><a th:href="@{/about}">About</a></li>
+				<li><a th:href="@{/contact}">Contact</a></li>
+				<li><a th:href="@{/product}">View Products</a></li>
+			</ul>
+			<ul class="nav-right">
+				<li><a th:href="@{/login}">Login</a></li>
+				<li><a th:href="@{/signup}">Sign Up</a></li>
+			</ul>
+		</div>
+		<div class="products">
+			<h2 id="editHeader">
+				Update Product
+			</h2>
+			<form action="#" th:action="@{/save_update}" th:object="${product}" method="post">
+				<table id="editProduct">
+					<tr>
+						<td id="editTag">ID:</td> <!-- ID -->
+						<td><input type="text" th:field="*{id}" readonly></td>
+					</tr>
+					<tr>
+						<td id="editTag">Name:</td> <!-- Name -->
+						<td><input type="text" th:field="*{name}"></td>
+					</tr>
+					<tr>
+						<td id="editTag">Brand:</td> <!-- Brand -->
+						<td><input type="text" th:field="*{brand}"></td>
+					</tr>
+					<tr>	
+						<td id="editTag">Qty. Available:</td> <!-- Qty -->
+						<td><input type="number" min="0" th:field="*{qtyAvailable}"></td>
+					</tr>
+					<tr>	
+						<td id="editTag">Price ($):</td> <!-- Price -->
+						<td><input type="text" th:field="*{price}"></td>
+						<td><input type="text" th:field="*{image}" hidden="hidden"></td> <!-- Sets original value to new value -->
+					</tr>
+					<tr>
+						<td><button type="submit" id="deleteButton" disabled>Delete</button></td>
+						<td><button type="submit" id="editButton">Update</button></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</body>
+</html>

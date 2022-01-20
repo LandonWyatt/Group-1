@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<script src="https://unpkg.com/htmx.org@1.6.1"></script>
+	</head>
+	<body>
+		<div th:fragment="product" id="table">
+			<table class="productTable">
+				<thead  hx-trigger="click delay:0.1s from:#sortButton" hx-get="/productChangeEntries" hx-target="#table" hx-swap="outerHTML">
+					<tr>
+						<th>ID<a onclick="sort('id')" id="sortButton"><img src="/images/sort.png"/></a></th>
+						<th></th>
+						<th>Name<a onclick="sort('name')" id="sortButton"><img src="/images/sort.png"/></a></th>
+						<th>Brand<a onclick="sort('brand')" id="sortButton"><img src="/images/sort.png"/></a></th>
+						<th>Qty. Avail.<a onclick="sort('qty')" id="sortButton"><img src="/images/sort.png"/></a></th>
+						<th>Unit Price<a onclick="sort('price')" id="sortButton"><img src="/images/sort.png"/></a></th>
+						<th>Quantity</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="prodIter" th:each="product, iterStat : ${products}" th:if="${iterStat.index}<${numChosen}">
+						<td th:text="${product.id}"></td> <!-- ID -->
+						<td><img th:alt="${product.id}" th:src="${product.image}"></td> <!-- Photo -->
+						<td th:text="${product.name}"></td> <!-- Name -->
+						<td th:text="${product.brand}"></td> <!-- Brand -->
+						<td th:text="${product.qtyAvailable}"></td> <!-- Qty -->
+						<td th:text="${product.price}"></td> <!-- Price -->
+						<td><input type="number" name="qtyToCart" id="qtyToCart" min="1"/></td> <!-- Quantity -->
+						<td> <!-- Add to Cart -->
+							<a th:href="@{/save_to_cart/{id}(id=${product.id})}">
+								<img src="/images/add-to-cart.png" alt="Add to Cart" height="30" />
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>
