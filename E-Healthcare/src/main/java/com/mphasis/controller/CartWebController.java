@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mphasis.model.Product;
@@ -24,12 +22,11 @@ public class CartWebController {
 	private ProductController productController;
 	private Map<Product, Integer> cartMap = new HashMap<Product, Integer>();
 	private List<Product> cartKeyList = Collections.synchronizedList(new ArrayList<>());
-	private String qtyInfo = "";
-	private double select = 10;
+	private double totalSum = 0;
 	
 	@GetMapping("/cart")
 	public ModelAndView getCart(Map<String, Object> model) {
-		model.put("subTotal", select);
+		model.put("totalSum", totalSum);
 		model.put("products", cartMap);
 		return new ModelAndView("cart");
 	}
@@ -38,7 +35,7 @@ public class CartWebController {
 	public String saveToCart(Map<String, Object> model, @PathVariable("id") Long id) {
 		Product p = productController.getProduct(id);
 		if(cartKeyList.isEmpty()) {
-			cartMap.put(p, 3);
+			cartMap.put(p, 1);
 			cartKeyList = new ArrayList<>(cartMap.keySet());
 		}
 		else {
@@ -47,18 +44,16 @@ public class CartWebController {
 			while(iter.hasNext()) {
 				Product item = iter.next();
 				if(item.getId() == id) {
+					cartMap.put(item, cartMap.get(item) + 1);
 					inCart = true;
 				}
 			}
-			if(inCart) {
-				System.out.println("ADD ONE");
-			}
-			else {
-				cartMap.put(p, 3);
+			if(!inCart) {
+				cartMap.put(p, 1);
 				cartKeyList = new ArrayList<>(cartMap.keySet());
 			}
 		}
-		return "redirect:/cart";
+		return "redirect:/totalSum";
 	}
 	
 	@GetMapping("/remove_from_cart/{id}")
@@ -73,18 +68,31 @@ public class CartWebController {
 				break;
 			}
 		}
+		return "redirect:/totalSum";
+	}
+	
+	@GetMapping("/totalSum")
+	public String calculateTotalSum(Map<String, Object> model) {
+		totalSum = 0;
+		
+		for(Map.Entry<Product, Integer> prodEntry : cartMap.entrySet()) {
+			totalSum += prodEntry.getKey().getPrice() * prodEntry.getValue();
+		}
+		
+		System.out.println(totalSum);
+		
 		return "redirect:/cart";
 	}
 	
-	@PostMapping("/update_cart")
-	public ModelAndView updateCart(Map<String, Object> model, @RequestBody Map<String, String> data){
-		qtyInfo = data.get("qtyInfo");
-		Long id = Long.parseLong(data.get("id"));
-		Product p = productController.getProduct(id);
-		double subTotal = p.getPrice() * Double.parseDouble(qtyInfo);
-		model.put("subTotal", subTotal);
-		select = subTotal;
-		return new ModelAndView("redirect:/cart");
-	}
+//	@PostMapping("/update_cart")
+//	public ModelAndView updateCart(Map<String, Object> model, @RequestBody Map<String, String> data){
+//		qtyInfo = data.get("qtyInfo");
+//		Long id = Long.parseLong(data.get("id"));
+//		Product p = productController.getProduct(id);
+//		double subTotal = p.getPrice() * Double.parseDouble(qtyInfo);
+//		model.put("subTotal", subTotal);
+//		select = subTotal;
+//		return new ModelAndView("redirect:/cart");
+//	}
 	
 }

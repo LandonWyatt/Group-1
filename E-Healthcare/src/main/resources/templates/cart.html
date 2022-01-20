@@ -47,9 +47,9 @@
 								</div>
 							</div>
 						</td>
-						<td th:text="${product.key.price}"></td>
+						<td th:text="${'$' + product.key.price}"></td>
 						<td id="qtyInCart" th:text="${product.value}"></td>
-						<td th:text="${product.key.price * product.value}"></td>
+						<td th:text="${'$' + product.key.price * product.value}"></td>
 						<td>
 							<a th:href="@{/remove_from_cart/{id}(id=${product.key.id})}"><img src="/images/delete.png" alt="Delete" height="30" /></a>
 						</td>
@@ -58,7 +58,7 @@
 						<td><button type="submit" id="continueShoppingButton"><b>&#8249</b> Continue Shopping</button></td>
 						<td></td>
 						<td></td>
-						<td>Total: <b>$0</b></td>
+						<td>Total: <b>$<span th:text="${totalSum}"></span></b></td>
 						<td><button type="submit" id="checkoutButton">Checkout <b>&#8250</b></button></td>
 					</tr>
 				</tbody>
