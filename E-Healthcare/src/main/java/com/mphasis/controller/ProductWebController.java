@@ -28,7 +28,7 @@ public class ProductWebController {
 	private String searchStr = "";
 	
 	// Testing value, determine based on user
-	private boolean admin = true;
+	private boolean admin = false;
 	
 	@GetMapping("/product")
 	public ModelAndView getProducts(Map<String, Object> model) {

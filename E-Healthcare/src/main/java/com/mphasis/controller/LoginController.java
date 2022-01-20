@@ -27,7 +27,7 @@ public class LoginController {
 	public String checkLoginPage(@ModelAttribute User user) {
 	Boolean checklogin = userService.validateUser(user); // tweak later, simply checks if user exists right now
 	if(checklogin) {
-		return "user_product";
+		return "redirect:/product";
 	}
 		
 	return "login";
