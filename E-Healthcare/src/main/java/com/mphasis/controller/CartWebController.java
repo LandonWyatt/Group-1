@@ -22,9 +22,8 @@ public class CartWebController {
 	
 	@Autowired
 	private ProductController productController;
-	private Map<Product, Double> cartMap = new HashMap<Product, Double>();
+	private Map<Product, Integer> cartMap = new HashMap<Product, Integer>();
 	private List<Product> cartKeyList = Collections.synchronizedList(new ArrayList<>());
-	private List<Double> cartQtyList = Collections.synchronizedList(new ArrayList<>());
 	private String qtyInfo = "";
 	private double select = 10;
 	
@@ -32,8 +31,6 @@ public class CartWebController {
 	public ModelAndView getCart(Map<String, Object> model) {
 		model.put("subTotal", select);
 		model.put("products", cartMap);
-//		model.put("products", cartKeyList);
-//		model.put("quantities", cartQtyList);
 		return new ModelAndView("cart");
 	}
 	
@@ -41,9 +38,8 @@ public class CartWebController {
 	public String saveToCart(Map<String, Object> model, @PathVariable("id") Long id) {
 		Product p = productController.getProduct(id);
 		if(cartKeyList.isEmpty()) {
-			cartMap.put(p, 3.0);
+			cartMap.put(p, 3);
 			cartKeyList = new ArrayList<>(cartMap.keySet());
-			cartQtyList = new ArrayList<>(cartMap.values());
 		}
 		else {
 			boolean inCart = false;
@@ -58,12 +54,10 @@ public class CartWebController {
 				System.out.println("ADD ONE");
 			}
 			else {
-				cartMap.put(p,1.0);
+				cartMap.put(p, 3);
 				cartKeyList = new ArrayList<>(cartMap.keySet());
-				cartQtyList = new ArrayList<>(cartMap.values());
 			}
 		}
-//		model.put("products", cartKeyList);
 		return "redirect:/cart";
 	}
 	
@@ -76,11 +70,9 @@ public class CartWebController {
 			if(item.getId() == id) {
 				cartMap.remove(item);
 				cartKeyList = new ArrayList<>(cartMap.keySet());
-				cartQtyList = new ArrayList<>(cartMap.values());
 				break;
 			}
 		}
-//		model.put("products", cartKeyList);
 		return "redirect:/cart";
 	}
 	

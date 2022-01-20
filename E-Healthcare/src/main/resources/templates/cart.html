@@ -51,7 +51,6 @@
 						<td id="qtyInCart" th:text="${product.value}"></td>
 						<td th:text="${product.key.price * product.value}"></td>
 						<td>
-							<!-- <a><img id="refresh" src="/images/refresh.png" alt="Refresh" height="30"/></a> -->
 							<a th:href="@{/remove_from_cart/{id}(id=${product.key.id})}"><img src="/images/delete.png" alt="Delete" height="30" /></a>
 						</td>
 					</tr>
