@@ -41,6 +41,19 @@ function sort(sortOrder) {
 }
 
 
+function qtyInput(sel) {
+	console.log("test");
+	console.log(sel.name);
+	var cartQty = document.getElementById("qtyInCart").innerHTML;
+	
+	let data = {qtyInfo: cartQty, id: sel.name};
+	
+	fetch("/update_cart", {
+	  method: "POST",
+	  headers: {'Content-Type': 'application/json'}, 
+	  body: JSON.stringify(data)
+	})
+}
 
 
 

@@ -5,6 +5,11 @@
 		<title>Medicare - Add Product</title>
 		<link rel="stylesheet" href="/css/styles.css">
 		<link rel="stylesheet" href="/css/productStyles.css">
+		<style>
+			#inputErrorMessage {
+				color: red;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="nav">
@@ -28,21 +33,32 @@
 					<tr>
 						<td id="editTag">Name:</td> <!-- Name -->
 						<td><input type="text" th:field="*{name}"></td>
+						<td><span id="inputErrorMessage" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></td>
 					</tr>
+					<!-- <tr th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></tr> -->
 					<tr>
 						<td id="editTag">Brand:</td> <!-- Brand -->
 						<td><input type="text" th:field="*{brand}"></td>
+						<td><span id="inputErrorMessage" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></span></td>
 					</tr>
-					<tr>	
+					<tr>
+						<td id="editTag">Description:</td> <!-- Description -->
+						<td><input type="text" th:field="*{description}"></td>
+						<td><span id="inputErrorMessage" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></td>
+					</tr>
+					<tr>
 						<td id="editTag">Qty. Available:</td> <!-- Qty -->
-						<td><input type="number" min="0" th:field="*{qtyAvailable}"></td>
+						<td><input type="number" th:field="*{qtyAvailable}" required></td>
+						<td><span id="inputErrorMessage" th:if="${#fields.hasErrors('qtyAvailable')}" th:errors="*{qtyAvailable}"></span></td>
 					</tr>
-					<tr>	
+					<tr>
 						<td id="editTag">Price ($):</td> <!-- Price -->
-						<td><input type="text" th:field="*{price}"></td>
+						<td><input type="text" th:field="*{price}" required></td>
+						<td><span id="inputErrorMessage" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span></td>
 					</tr>
 					<tr>
 						<td colspan="2"><button id="editButton" type="submit">Add</button></td>
+						<td></td>
 					</tr>
 				</table>
 			</form>

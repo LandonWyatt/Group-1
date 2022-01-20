@@ -6,12 +6,13 @@
 	<body>
 		<div th:fragment="product" id="table">
 			<table class="productTable">
-				<thead  hx-trigger="click delay:0.1s from:#sortButton" hx-get="/productChangeEntries" hx-target="#table" hx-swap="outerHTML">
+				<thead hx-trigger="click delay:0.1s from:#sortButton" hx-get="/productChangeEntries" hx-target="#table" hx-swap="outerHTML">
 					<tr>
 						<th>ID<a onclick="sort('id')" id="sortButton"><img src="/images/sort.png"/></a></th>
 						<th></th>
 						<th>Name<a onclick="sort('name')" id="sortButton"><img src="/images/sort.png"/></a></th>
 						<th>Brand<a onclick="sort('brand')" id="sortButton"><img src="/images/sort.png"/></a></th>
+						<th>Description</th>
 						<th>Qty. Avail.<a onclick="sort('qty')" id="sortButton"><img src="/images/sort.png"/></a></th>
 						<th>Unit Price<a onclick="sort('price')" id="sortButton"><img src="/images/sort.png"/></a></th>
 						<th>Quantity</th>
@@ -23,12 +24,13 @@
 						<td><img th:alt="${product.id}" th:src="${product.image}"></td> <!-- Photo -->
 						<td th:text="${product.name}"></td> <!-- Name -->
 						<td th:text="${product.brand}"></td> <!-- Brand -->
+						<td th:text="${product.description}"></td> <!-- Description -->
 						<td th:text="${product.qtyAvailable}"></td> <!-- Qty -->
 						<td th:text="${product.price}"></td> <!-- Price -->
 						<td><input type="number" name="qtyToCart" id="qtyToCart" min="1"/></td> <!-- Quantity -->
 						<td> <!-- Add to Cart -->
 							<a th:href="@{/save_to_cart/{id}(id=${product.id})}">
-								<img src="/images/add-to-cart.png" alt="Add to Cart" height="30" />
+								<img src="/images/add-to-cart.png" alt="Add to Cart" height="30" th:onclick="qtyInput(this)" th:name="${product.id}"/>
 							</a>
 						</td>
 					</tr>
