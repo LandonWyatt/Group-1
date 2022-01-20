@@ -26,15 +26,15 @@ public class UserService {
 			return false;
 	}
 	
-	public Boolean validateUser(User user) {
+	public String validateUser(User user) {
 		List<User> userlist = userRepository.findByEmail(user.getEmail());
 		User userFromDb = userlist.get(0);
 		
 		if(userFromDb.getPassword().equals(user.getPassword())) {
-			return Boolean.TRUE;
+			return userFromDb.getFirstName();
 		}
 		
-		return Boolean.FALSE;
+		return null;
 	}
 	
 	public void addUser(User user) {

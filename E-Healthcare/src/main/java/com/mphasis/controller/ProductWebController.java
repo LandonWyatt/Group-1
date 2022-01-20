@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mphasis.model.Product;
@@ -28,8 +29,8 @@ public class ProductWebController {
 	private boolean admin = false;
 	
 	@GetMapping("/product")
-	public ModelAndView getProducts(Map<String, Object> model) {
-		System.out.println("/product mapping visited");
+	public ModelAndView getProducts(Map<String, Object> model, Model pageModel, @RequestParam(required = false) String firstName) {
+		System.out.println("/product mapping visited" + firstName);
 		List<Product> productsList = productController.getAllProductSearch(searchStr);
 		
 		if(!admin)
@@ -38,10 +39,14 @@ public class ProductWebController {
 		model.put("numChosen", numEntries);
 		model.put("products", productsList);
 		// user_product or admin_product needs to be determined and decide which to return
-		if(admin)
+		if(admin) {
+			pageModel.addAttribute("firstName", firstName);
 			return new ModelAndView("admin_product");
-		else
+		}else {
+			pageModel.addAttribute("firstName", firstName);
 			return new ModelAndView("user_product");
+		}
+			
 	}
 	
 	@GetMapping("/productChangeEntries")

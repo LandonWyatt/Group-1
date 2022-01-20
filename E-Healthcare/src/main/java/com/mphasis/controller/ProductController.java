@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,8 @@ public class ProductController {
 	private String sortedSearch = "id";
 	
 	@GetMapping("/products")
-	public List<Product> getAllProducts() {
+	public List<Product> getAllProducts(Model model) {
+		System.out.println("I ma here" + model.getAttribute("firstName"));
 		return productService.getAllProducts();
 	}
 

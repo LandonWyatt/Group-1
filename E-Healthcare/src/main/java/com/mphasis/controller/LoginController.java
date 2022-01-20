@@ -24,9 +24,11 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String checkLoginPage(@ModelAttribute User user) {
-	Boolean checklogin = userService.validateUser(user); // tweak later, simply checks if user exists right now
-	if(checklogin) {
+	public String checkLoginPage(@ModelAttribute User user, Model model) {
+	String firstName = userService.validateUser(user); // tweak later, simply checks if user exists right now
+	if(firstName != null) { 
+		
+		model.addAttribute("firstName", firstName);
 		return "user_product";
 	}
 		
