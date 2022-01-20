@@ -15,11 +15,12 @@
 				<li><a th:href="@{/product}">View Products</a></li>
 			</ul>
 			<ul class="nav-right">
+				<li><a th:href="@{/cart}">Cart</a></li>
 				<li><a th:href="@{/login}">Login</a></li>
 				<li><a th:href="@{/signup}">Sign Up</a></li>
 			</ul>
 		</div>
-		<div class="products">
+		<div class="products" th:switch="${products}">
 			<h2>
 				Your Cart:
 			</h2>
@@ -33,49 +34,30 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr id="cartProduct">
+					<tr id="cartProduct" th:each="product : ${products}">
 						<td>
 							<div id="productInCart">
-								<img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-157402355-1549537663.jpg?crop=1.00xw:0.806xh;0,0.0583xh&resize=980:*">
+								<img th:alt="${product.id}" th:src="${product.image}">
 								<div>
-									<h3>Paracetamol</h3> <!-- Name -->
-									<p>Brand: Cipla</p> <!-- Brand -->
+									<h3 th:text="${product.name}"></h3> <!-- Name -->
+									<p style="display:inline">Brand: <p style="display:inline" th:text="${product.brand}"></p> <!-- Brand -->
 									<p>Description: An antipyretic medicine used for fevers.</p> <!-- Description -->
 								</div>
 							</div>
 						</td>
-						<td>$18</td>
+						<td th:text="${product.price}"></td>
 						<td><input type="number" name="qtyInCart" id="qtyInCart" min="1"/></td>
-						<td>$18</td>
+						<td th:text="${product.price * 1}"></td>
 						<td>
 							<a href="#"><img src="/images/refresh.png" alt="Refresh" height="30" /></a>
-							<a href="#"><img src="/images/delete.png" alt="Delete" height="30" /></a>
-						</td>
-					</tr>
-					<tr id="cartProduct">
-						<td>
-							<div id="productInCart">
-								<img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-157402355-1549537663.jpg?crop=1.00xw:0.806xh;0,0.0583xh&resize=980:*">
-								<div>
-									<h3>Paracetamol</h3> <!-- Name -->
-									<p>Brand: Cipla</p> <!-- Brand -->
-									<p>Description: An antipyretic medicine used for fevers.</p> <!-- Description -->
-								</div>
-							</div>
-						</td>
-						<td>$18</td>
-						<td><input type="number" name="qtyInCart" id="qtyInCart" min="1"/></td>
-						<td>$18</td>
-						<td>
-							<a href="#"><img src="/images/refresh.png" alt="Refresh" height="30" /></a>
-							<a href="#"><img src="/images/delete.png" alt="Delete" height="30" /></a>
+							<a th:href="@{/remove_from_cart/{id}(id=${product.id})}"><img src="/images/delete.png" alt="Delete" height="30" /></a>
 						</td>
 					</tr>
 					<tr id="cartManagement">
 						<td><button type="submit" id="continueShoppingButton"><b>&#8249</b> Continue Shopping</button></td>
 						<td></td>
 						<td></td>
-						<td>Total: <b>$18</b></td>
+						<td>Total: <b>$0</b></td>
 						<td><button type="submit" id="checkoutButton">Checkout <b>&#8250</b></button></td>
 					</tr>
 				</tbody>

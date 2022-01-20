@@ -23,26 +23,26 @@
 			<h2 id="editHeader">
 				Add Product
 			</h2>
-			<form action="#">
+			<form action="#" th:action="@{/save_product}" th:object="${product}" method="post">
 				<table id="editProduct">
 					<tr>
 						<td id="editTag">Name:</td> <!-- Name -->
-						<td><input type="text"></td>
+						<td><input type="text" th:field="*{name}"></td>
 					</tr>
 					<tr>
 						<td id="editTag">Brand:</td> <!-- Brand -->
-						<td><input type="text"></td>
+						<td><input type="text" th:field="*{brand}"></td>
 					</tr>
 					<tr>	
 						<td id="editTag">Qty. Available:</td> <!-- Qty -->
-						<td><input type="number" min="0"></td>
+						<td><input type="number" min="0" th:field="*{qtyAvailable}"></td>
 					</tr>
 					<tr>	
 						<td id="editTag">Price ($):</td> <!-- Price -->
-						<td><input type="text"></td>
+						<td><input type="text" th:field="*{price}"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><button type="submit" id="editButton">Add</button></td>
+						<td colspan="2"><button id="editButton" type="submit">Add</button></td>
 					</tr>
 				</table>
 			</form>
