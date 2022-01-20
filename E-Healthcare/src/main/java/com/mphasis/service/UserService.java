@@ -1,5 +1,6 @@
 package com.mphasis.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,17 @@ public class UserService {
 			return true;
 		else
 			return false;
+	}
+	
+	public Boolean validateUser(User user) {
+		List<User> userlist = userRepository.findByEmail(user.getEmail());
+		User userFromDb = userlist.get(0);
+		
+		if(userFromDb.getPassword().equals(user.getPassword())) {
+			return Boolean.TRUE;
+		}
+		
+		return Boolean.FALSE;
 	}
 	
 	public void addUser(User user) {

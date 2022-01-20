@@ -18,6 +18,7 @@ public class User {
 	private String lastName;
 	private String email;
 	private String password;
+	private String confirmPassword;
 	private boolean admin;
 	
 	public User() {}
@@ -80,6 +81,14 @@ public class User {
 		this.admin = admin;
 	}
 	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email

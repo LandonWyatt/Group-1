@@ -21,14 +21,14 @@
 	</div>
 
 	<main>
-		<form>
+		<form action="#" th:action="@{/login}" th:object="${user}" method="post">
 			<div class="container">
 				<h1 id="loginHeader1">Login</h1>
 				<div id="loginInputs">
 					<label>Email:</label>
-					<input id="email" type="email" placeholder="Enter Email" name="useremail" required><br>
+					<input id="email" type="email" th:field="*{email}" placeholder="Enter Email" name="useremail" required><br>
 					<label>Password:</label>
-					<input id="password" type="password" placeholder="Enter Password" name="password" required><br><br>
+					<input id="password" type="password" th:field="*{password}" placeholder="Enter Password" name="password" required><br><br>
 				</div>
 				<button id=loginButton type="submit">Login</button><br>
 				<h2 id="loginHeader2">New user? <a th:href="@{/signup}"> Register Here</a></h2>

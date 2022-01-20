@@ -1,28 +1,36 @@
 package com.mphasis.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.mphasis.model.User;
 import com.mphasis.service.UserService;
 
-@RestController
+@Controller
 public class LoginController {
 	
 	@Autowired
 	private UserService userService;
 	
-//	@GetMapping("/login")
-//	public String showLoginPage() {
-//		return "login";
-//	}
+	@GetMapping("/login")
+	public String showLoginPage(Model model) {
+		model.addAttribute("user", new User());
+		System.out.println("Inside login controller");
+		return "login";
+	}
 	
 	@PostMapping("/login")
-	public String checkLoginPage(Long id) {
-//		boolean checklogin = userService.checkUser(id); // tweak later, simply checks if user exists right now
+	public String checkLoginPage(@ModelAttribute User user) {
+	Boolean checklogin = userService.validateUser(user); // tweak later, simply checks if user exists right now
+	if(checklogin) {
+		return "user_product";
+	}
 		
-		return "login";
+	return "login";
 	}
 	
 }

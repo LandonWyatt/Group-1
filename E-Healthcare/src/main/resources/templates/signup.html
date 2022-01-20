@@ -8,6 +8,7 @@
 	<!-- <script type="text/javascript" src="scripts\signupScript.js"></script> -->
 </head>
 <body>
+
 	<div class="nav">
 		<ul class="nav-left">
 			<li><a th:href="@{/}">Main Page</a></li>
@@ -22,20 +23,20 @@
 	</div>
 
 	<main>
-		<form>
+		<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
 			<div class="container">
 				<h1 id="signupHeader1">Register</h1>
 				<div id="signupInputs">
 					<label>First Name:</label>
-					<input id=firstName type="text" placeholder="Enter First Name" name="firstname" required><br>
+					<input type="text" th:field="*{firstName}" placeholder="Enter First Name" name="firstname" required><br>
 					<label>Last Name:</label>
-					<input id="lastName" type="text" placeholder="Enter Last Name" name="lastname" required><br>
+					<input id="lastName" type="text" th:field="*{lastName}" placeholder="Enter Last Name" name="lastname" required><br>
 					<label>Email:</label>
-					<input id="email" type="email" placeholder="Enter Email" name="useremail" required><br>
+					<input id="email" type="email" th:field="*{email}" placeholder="Enter Email" name="useremail" required><br>
 					<label>Password:</label>
-					<input id="password" type="password" onkeyup="check();" placeholder="Enter Password" name="password" required><br>
+					<input id="password" type="password" th:field="*{password}" onkeyup="check();" placeholder="Enter Password" name="password" required><br>
 					<label>Confirm Password:</label>
-					<input id="confirmPassword" type="password" onkeyup="check();" placeholder="Re-Enter Password" name="password" required><br>
+					<input id="confirmPassword" type="password" th:field="*{confirmPassword}" onkeyup="check();" placeholder="Re-Enter Password" name="password" required><br>
 					<span id="message">""</span><br>
 				</div>
 				<button id=signupButton type="submit">Register</button><br>

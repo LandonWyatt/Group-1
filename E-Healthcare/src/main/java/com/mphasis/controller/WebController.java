@@ -27,14 +27,12 @@ public class WebController {
 		return "contact";
 	}
 	
-	@GetMapping("/login")
-	public String getLogin() {
-		return "login";
-	}
+	/*
+	 * @GetMapping("/login") public String getLogin() { return "login"; }
+	 */
 	
-	@GetMapping("/signup")
-	public String getSignup() {
-		return "signup";
-	}
+	/*
+	 * @GetMapping("/signup") public String getSignup() { return "signup"; }
+	 */
 
 }
