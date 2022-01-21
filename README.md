@@ -1,5 +1,5 @@
-## Group-1 E-Healthcare
-# By Jackson, Landon, Anuradha, and Chaitali
+# Group-1 E-Healthcare
+## By Jackson, Landon, Anuradha, and Chaitali
 
 1. Check application.properties and replace username and password with your values for logging into MySQL.
 2. Run the Java Application.
