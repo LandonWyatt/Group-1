@@ -30,7 +30,7 @@ public class SignUpController {
 		
 		if(userService.checkIfUserExists(user.getEmail())) {
 			System.out.println("User exists");
-			model.addAttribute("errorMessage", "User with emailid exits");
+			model.addAttribute("errorMessage", "User with EmailId exits");
 			return "signup";
 			
 		}else {
