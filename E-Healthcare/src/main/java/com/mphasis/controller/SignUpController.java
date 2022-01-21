@@ -24,11 +24,21 @@ public class SignUpController {
 	 
 	
 	@PostMapping("/signup")
-	public String signUpUserPage(@ModelAttribute User user) {
+	public String signUpUserPage(@ModelAttribute User user, Model model) {
 		System.out.println("register button code will go here ");
 		System.out.println("FirstName" + user.getFirstName());
-		userService.addUser(user); //calling a user service to add a user 
-		return "login";
+		
+		if(userService.checkIfUserExists(user.getEmail())) {
+			System.out.println("User exists");
+			model.addAttribute("errorMessage", "User with emailid exits");
+			return "signup";
+			
+		}else {
+			userService.addUser(user); //calling a user service to add a user 
+			return "login";
+		}
+		
+		
 	}
 	
 }

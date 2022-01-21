@@ -41,4 +41,14 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
+	public boolean checkIfUserExists(String email) {
+		List<User> userlist = userRepository.findByEmail(email);
+		
+		if(userlist!=null && !userlist.isEmpty()) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 }
