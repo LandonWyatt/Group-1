@@ -5,6 +5,8 @@
 		<title>Medicare - Cart</title>
 		<link rel="stylesheet" href="/css/styles.css">
 		<link rel="stylesheet" href="/css/productStyles.css">
+		<script src="/js/script.js" type="text/javascript"></script>
+		<script src="https://unpkg.com/htmx.org@1.6.1"></script>
 	</head>
 	<body>
 		<div class="nav">
@@ -24,7 +26,7 @@
 			<h2>
 				Your Cart:
 			</h2>
-			<table class="cartTable">
+			<table class="cartTable" hx-trigger="click delay:0.1s from:#refresh" hx-get="/cart" hx-target=".cartTable" hx-swap="outerHTML">
 				<thead>
 					<tr>
 						<th>Product</th>
@@ -37,28 +39,27 @@
 					<tr id="cartProduct" th:each="product : ${products}">
 						<td>
 							<div id="productInCart">
-								<img th:alt="${product.id}" th:src="${product.image}">
+								<img th:alt="${product.key.id}" th:src="${product.key.image}">
 								<div>
-									<h3 th:text="${product.name}"></h3> <!-- Name -->
-									<p style="display:inline">Brand: <p style="display:inline" th:text="${product.brand}"></p> <!-- Brand -->
-									<p>Description: An antipyretic medicine used for fevers.</p> <!-- Description -->
+									<h3 th:text="${product.key.name}"></h3> <!-- Name -->
+									<p style="display:inline">Brand: <p style="display:inline" th:text="${product.key.brand}"></p> <!-- Brand -->
+									<p>Description: <p style="display:inline" th:text="${product.key.description}"></p> <!-- Description -->
 								</div>
 							</div>
 						</td>
-						<td th:text="${product.price}"></td>
-						<td><input type="number" name="qtyInCart" id="qtyInCart" min="1"/></td>
-						<td th:text="${product.price * 1}"></td>
+						<td th:text="${'$' + product.key.price}"></td>
+						<td id="qtyInCart" th:text="${product.value}"></td>
+						<td th:text="${'$' + product.key.price * product.value}"></td>
 						<td>
-							<a href="#"><img src="/images/refresh.png" alt="Refresh" height="30" /></a>
-							<a th:href="@{/remove_from_cart/{id}(id=${product.id})}"><img src="/images/delete.png" alt="Delete" height="30" /></a>
+							<a th:href="@{/remove_from_cart/{id}(id=${product.key.id})}"><img src="/images/delete.png" alt="Delete" height="30" /></a>
 						</td>
 					</tr>
 					<tr id="cartManagement">
 						<td><button type="submit" id="continueShoppingButton"><b>&#8249</b> Continue Shopping</button></td>
 						<td></td>
 						<td></td>
-						<td>Total: <b>$0</b></td>
-						<td><button type="submit" id="checkoutButton">Checkout <b>&#8250</b></button></td>
+						<td>Total: <b>$<span th:text="${totalSum}"></span></b></td>
+						<td><a th:href="@{/checkout}"><button type="submit" id="checkoutButton">Checkout<b>&#8250</b></button></a></td>
 					</tr>
 				</tbody>
 			</table>

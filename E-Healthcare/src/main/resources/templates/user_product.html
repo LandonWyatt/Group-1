@@ -13,14 +13,22 @@
 		<div class="nav">
 			<ul class="nav-left">
 				<li><a th:href="@{/}">Main Page</a></li>
-				<li><a th:href="@{/about}">About</a></li>
-				<li><a th:href="@{/contact}">Contact</a></li>
-				<li><a th:href="@{/product}">View Products</a></li>
+				<!-- wil set the value to firstname  -->
+				<li><a th:href="@{/about?firstName={firstName}(firstName=${firstName})}">About</a></li>
+				<li><a th:href="@{/contact?firstName={firstName}(firstName=${firstName})}">Contact</a></li>
+				<li><a th:href="@{/product?firstName={firstName}(firstName=${firstName})}">View Products</a></li>
+				
 			</ul>
-			<ul class="nav-right">
+			<ul class="nav-right"> 
+				<!-- will print the value  -->
+				<li style= " font-family:verdana;color:white; background:#04AA6D;border:2px solid black;margin:20px;padding:20px;">
+					Welcome <td th:text="${firstName}"></td> </li>
 				<li><a th:href="@{/cart}">Cart</a></li>
-				<li><a th:href="@{/login}">Login</a></li>
-				<li><a th:href="@{/signup}">Sign Up</a></li>
+				<li><a th:href="@{/logout}">Logout</a></li>
+				
+			
+				<!--  <li><a th:href="@{/login}">Login</a></li> -->
+				<!--  <li><a th:href="@{/signup}">Sign Up</a></li> -->
 			</ul>
 		</div>
 		<div class="products">
@@ -61,7 +69,6 @@
 
 				<p class="footer-links">
 					<a th:href="@{/}">Home</a>
-					
 					
 					|
 					<a th:href="@{/about}">About</a>

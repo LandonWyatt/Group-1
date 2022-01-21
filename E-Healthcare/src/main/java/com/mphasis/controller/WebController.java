@@ -1,14 +1,9 @@
 package com.mphasis.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.mphasis.model.Product;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class WebController {
@@ -21,23 +16,35 @@ public class WebController {
 	}
 	
 	@GetMapping("/about")
-	public String getAbout() {
+	public String getAbout(@RequestParam(required = false) String firstName, Model model) {
+		model.addAttribute("firstName", firstName);
 		return "about";
 	}
 	
 	@GetMapping("/contact")
-	public String getContact() {
+	public String getContact(@RequestParam(required = false) String firstName, Model model) {
+		model.addAttribute("firstName", firstName);
 		return "contact";
 	}
 	
-	@GetMapping("/login")
-	public String getLogin() {
-		return "login";
+	@GetMapping("/logout")
+	public String getLogout() {
+		return "index";
 	}
 	
-	@GetMapping("/signup")
-	public String getSignup() {
-		return "signup";
+	@GetMapping("/checkout")
+	public String getCheckout() {
+		return "checkout";
 	}
+	
+	/*
+	 * @GetMapping("/login") public String getLogin() { return "login"; }
+	 */
+	
+	/*
+	 * @GetMapping("/signup") public String getSignup() { return "signup"; }
+	 */
+	
+	
 
 }

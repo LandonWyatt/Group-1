@@ -22,14 +22,14 @@
 	</div>
 
 	<main>
-		<form>
+		<form action="#" th:action="@{/login}" th:object="${user}" method="post">
 			<div class="container">
 				<h1 id="loginHeader1">Login</h1>
 				<div id="loginInputs">
 					<label>Email:</label>
-					<input id="email" type="email" placeholder="Enter email.." name="useremail" required><br>
+					<input id="email" type="email" th:field="*{email}" placeholder="Enter Email" name="useremail" required><br>
 					<label>Password:</label>
-					<input id="password" type="password" placeholder="Enter password.." name="password" required><br><br>
+					<input id="password" type="password" th:field="*{password}" placeholder="Enter Password" name="password" required><br><br>
 				</div>
 				<button id=loginButton type="submit">Login</button><br>
 				<h2 id="loginHeader2">New user? <a th:href="@{/signup}"> Register Here</a></h2>
@@ -40,13 +40,13 @@
 <footer class="footer-distributed" >
 
 			<div class="footer-left">
-          
+
 				<h3>About<span>Medicine</span></h3>
 
 				<p class="footer-links">
 					<a th:href="@{/}">Home</a>
-					
-					
+
+
 					|
 					<a th:href="@{/about}">About</a>
 					|
@@ -85,7 +85,7 @@
 				</div>
 			</div>
 		</footer>
-		
+
 
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

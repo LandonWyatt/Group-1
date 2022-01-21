@@ -5,6 +5,11 @@
 		<title>Medicare - Update Product</title>
 		<link rel="stylesheet" href="/css/styles.css">
 		<link rel="stylesheet" href="/css/productStyles.css">
+		<style>
+			#inputErrorMessage {
+				color: red;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="nav">
@@ -15,8 +20,10 @@
 				<li><a th:href="@{/product}">View Products</a></li>
 			</ul>
 			<ul class="nav-right">
-				<li><a th:href="@{/login}">Login</a></li>
-				<li><a th:href="@{/signup}">Sign Up</a></li>
+				<!-- <li><a th:href="@{/login}">Login</a></li>
+				<li><a th:href="@{/signup}">Sign Up</a></li>-->
+				<li><a th:href="@{/logout}">Logout</a></li>
+				
 			</ul>
 		</div>
 		<div class="products">
@@ -28,27 +35,38 @@
 					<tr>
 						<td id="editTag">ID:</td> <!-- ID -->
 						<td><input type="text" th:field="*{id}" readonly></td>
+						<td></td>
 					</tr>
 					<tr>
 						<td id="editTag">Name:</td> <!-- Name -->
 						<td><input type="text" th:field="*{name}"></td>
+						<td><span id="inputErrorMessage" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></td>
 					</tr>
 					<tr>
 						<td id="editTag">Brand:</td> <!-- Brand -->
 						<td><input type="text" th:field="*{brand}"></td>
+						<td><span id="inputErrorMessage" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></span></td>
+					</tr>
+					<tr>
+						<td id="editTag">Description:</td> <!-- Description -->
+						<td><input type="text" th:field="*{description}"></td>
+						<td><span id="inputErrorMessage" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></td>
 					</tr>
 					<tr>	
 						<td id="editTag">Qty. Available:</td> <!-- Qty -->
-						<td><input type="number" min="0" th:field="*{qtyAvailable}"></td>
+						<td><input type="number" th:field="*{qtyAvailable}" required></td>
+						<td><span id="inputErrorMessage" th:if="${#fields.hasErrors('qtyAvailable')}" th:errors="*{qtyAvailable}"></span></td>
 					</tr>
 					<tr>	
 						<td id="editTag">Price ($):</td> <!-- Price -->
-						<td><input type="text" th:field="*{price}"></td>
+						<td><input type="text" th:field="*{price}" required></td>
+						<td><span id="inputErrorMessage" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span></td>
 						<td><input type="text" th:field="*{image}" hidden="hidden"></td> <!-- Sets original value to new value -->
 					</tr>
 					<tr>
-						<td><button type="submit" id="deleteButton" disabled>Delete</button></td>
+						<td><button type="submit" th:formaction="@{/delete_product/{id}(id=${product.id})}" formmethod="POST" id="deleteButton">Delete</button></td>
 						<td><button type="submit" id="editButton">Update</button></td>
+						<td></td>
 					</tr>
 				</table>
 			</form>

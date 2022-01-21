@@ -23,20 +23,20 @@
 	</div>
 
 	<main>
-		<form>
+		<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
 			<div class="container">
 				<h1 id="signupHeader1">Register</h1>
 				<div id="signupInputs">
 					<label>First Name:</label>
-					<input id=firstName type="text" placeholder="Enter first name.." name="firstname" required><br>
+					<input id=firstName type="text" th:field="*{firstName}" placeholder="Enter First Name" name="firstname" required><br>
 					<label>Last Name:</label>
-					<input id="lastName" type="text" placeholder="Enter last name.." name="lastname" required><br>
+					<input id="lastName" type="text" th:field="*{lastName}" placeholder="Enter Last Name" name="lastname" required><br>
 					<label>Email:</label>
-					<input id="email" type="email" placeholder="Enter email.." name="useremail" required><br>
+					<input id="email" type="email" th:field="*{email}" placeholder="Enter Email" name="useremail" required><br>
 					<label>Password:</label>
-					<input id="password" type="password" onkeyup="check();" placeholder="Enter password.." name="password" required><br>
+					<input id="password" type="password" th:field="*{password}" onkeyup="check();" placeholder="Enter Password" name="password" required><br>
 					<label>Confirm Password:</label>
-					<input id="confirmPassword" type="password" onkeyup="check();" placeholder="Re-Enter password.." name="password" required><br>
+					<input id="confirmPassword" type="password" th:field="*{confirmPassword}" onkeyup="check();" placeholder="Re-Enter Password" name="password" required><br>
 					<span id="message">""</span><br>
 				</div>
 				<button id=signupButton type="submit">Register</button><br>
@@ -48,13 +48,13 @@
 <footer class="footer-distributed" >
 
 			<div class="footer-left">
-          
+
 				<h3>About<span>Medicine</span></h3>
 
 				<p class="footer-links">
 					<a th:href="@{/}">Home</a>
-					
-					
+
+
 					|
 					<a th:href="@{/about}">About</a>
 					|
@@ -93,7 +93,7 @@
 				</div>
 			</div>
 		</footer>
-		
+
 
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

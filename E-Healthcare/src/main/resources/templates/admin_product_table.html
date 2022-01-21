@@ -11,6 +11,7 @@
 						<th></th>
 						<th>Name<a onclick="sort('name')" id="sortButton"><img src="/images/sort.png"/></a></th>
 						<th>Brand<a onclick="sort('brand')" id="sortButton"><img src="/images/sort.png"/></a></th>
+						<th>Description</th>
 						<th>Qty. Avail.<a onclick="sort('qty')" id="sortButton"><img src="/images/sort.png"/></a></th>
 						<th>Unit Price<a onclick="sort('price')" id="sortButton"><img src="/images/sort.png"/></a></th>
 						<th>Activate</th>
@@ -22,6 +23,7 @@
 						<td><img th:alt="${product.id}" th:src="${product.image}"></td> <!-- Photo -->
 						<td th:text="${product.name}"></td> <!-- Name -->
 						<td th:text="${product.brand}"></td> <!-- Brand -->
+						<td th:text="${product.description}"></td> <!-- Description -->
 						<td th:text="${product.qtyAvailable}"></td> <!-- Qty -->
 						<td th:text="${product.price}"></td> <!-- Price -->
 						<td> <!-- Activate -->
