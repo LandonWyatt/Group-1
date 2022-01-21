@@ -75,7 +75,6 @@ public class CartWebController {
 	 */
 	@GetMapping("/remove_from_cart/{id}")
 	public String removeFromCart(Map<String, Object> model, @PathVariable("id") Long id) {
-		System.out.println(cartKeyList);
 		Iterator<Product> iter = cartKeyList.iterator();
 		while(iter.hasNext()) { // Find product, then delete
 			Product item = iter.next();
@@ -93,13 +92,17 @@ public class CartWebController {
 		Product prod = new Product();
 			
 		for (Product product : cartKeyList) {
-			if (product.getId() == Long.parseLong(data.get("id")))
+			if (product.getId() == Long.parseLong(data.get("id"))) {
 				prod = product;
+				break;
+			}
 		}
-		if(Integer.parseInt(data.get("qtyInfo")) < 1)
+		if(Integer.parseInt(data.get("qtyInfo")) < 1) {
 			cartMap.put(prod, 1);
-		else
+		}
+		else {
 			cartMap.put(prod, Integer.parseInt(data.get("qtyInfo")));
+		}
 		return "redirect:/totalSum";
 	}
 	
