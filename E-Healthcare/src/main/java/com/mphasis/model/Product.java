@@ -33,7 +33,7 @@ public class Product {
 		this.image = "/images/products/" + this.id + ".jpg";
 		this.activate = false;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}

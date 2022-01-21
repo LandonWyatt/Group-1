@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,82 +22,92 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mphasis.model.Product;
 
+
+/*
+ * Web Controller that will redirect all mappings for any product related method calls
+ */
 @Controller
 public class ProductWebController {
 	
 	@Autowired
 	private ProductController productController;
-	private int numEntries = 5;
-	private String searchStr = "";
 	
-	// Testing value, determine based on user
+	// Determine if visiting as an Admin or not
 	private boolean admin = false;
 	
+	/*
+	 * directs the user to the two different product pages, based on being admin or not, on initial visit
+	 */
 	@GetMapping("/product")
-	public ModelAndView getProducts(Map<String, Object> model, Model pageModel, @RequestParam(required = false) String firstName) {
-		System.out.println("/product mapping visited" + firstName);
-		List<Product> productsList = productController.getAllProductSearch(searchStr);
+	public ModelAndView getProducts(Map<String, Object> model, @RequestParam(required = false) String firstName, HttpSession session, HttpServletRequest req) {
+		// Set initial value to numEntries in session
+		if(session.getAttribute("numEntries") == null)
+			req.getSession().setAttribute("numEntries", 5);
+		// Set initial value to searchStr in session
+		if(session.getAttribute("searchStr") == null)
+			req.getSession().setAttribute("searchStr", "");
+		
+		List<Product> productsList = productController.getAllProductSearch((String) session.getAttribute("searchStr"));
 		
 		if(!admin)
 			productsList = productsList.stream().filter((Product prod) -> {return prod.isActivate();}).collect(Collectors.toList());
 		
-		model.put("numChosen", numEntries);
+		model.put("numChosen", session.getAttribute("numEntries"));
 		model.put("products", productsList);
-		// user_product or admin_product needs to be determined and decide which to return
+		
 		if(admin) {
-			pageModel.addAttribute("firstName", firstName);
+			model.put("firstName", firstName);
 			return new ModelAndView("admin_product");
-		}else {
-			pageModel.addAttribute("firstName", firstName);
+		} else {
+			model.put("firstName", firstName);
 			return new ModelAndView("user_product");
 		}
 			
 	}
 	
+	/*
+	 * directs the user to the two different product pages, based on being admin or not,
+	 * only after an update to the filter/search results have changed on the product pages
+	 *  - admin_product_table and user_product_table are both Thymeleaf fragments that
+	 *    are called to then be placed in the admin_product and user_product pages
+	 */
 	@GetMapping("/productChangeEntries")
-	public ModelAndView getProductChangeEntries(Map<String, Object> model) {
-		List<Product> productsList = productController.getAllProductSearch(searchStr);
+	public ModelAndView getProductChangeEntries(Map<String, Object> model, HttpSession session) {
+		List<Product> productsList = productController.getAllProductSearch((String) session.getAttribute("searchStr"));
 		
 		if(!admin)
 			productsList = productsList.stream().filter((Product prod) -> {return prod.isActivate();}).collect(Collectors.toList());
 		
-		model.put("numChosen", numEntries);
+		model.put("numChosen", session.getAttribute("numEntries"));
 		model.put("products", productsList);
-		// user_product or admin_product needs to be determined and decide which to return
+		
 		if(admin)
 			return new ModelAndView("admin_product_table.html :: product");
 		else
 			return new ModelAndView("user_product_table.html :: product");
 	}
 	
+	/*
+	 * When user changes entry count on product page, this will be called setting the number of entries
+	 */
 	@PostMapping("/productChangeEntries")
-	public ModelAndView postProductChangeEntries(Map<String, Object> model, @RequestBody Map<String, String> data) {
-		numEntries = Integer.parseInt(data.get("numEntries"));
+	public ModelAndView postProductChangeEntries(Map<String, Object> model, @RequestBody Map<String, String> data, HttpServletRequest req) {
+		req.getSession().setAttribute("numEntries", Integer.parseInt(data.get("numEntries")));
 		return new ModelAndView("redirect:/productChangeEntries");
 	}
 	
-	@GetMapping("/productChangeSearch")
-	public ModelAndView getProductChangeSearch(Map<String, Object> model) {
-		List<Product> productsList = productController.getAllProductSearch(searchStr);
-		
-		if(!admin)
-			productsList = productsList.stream().filter((Product prod) -> {return prod.isActivate();}).collect(Collectors.toList());
-		
-		model.put("numChosen", numEntries);
-		model.put("products", productsList);
-		// user_product or admin_product needs to be determined and decide which to return
-		if(admin)
-			return new ModelAndView("admin_product_table.html :: product");
-		else
-			return new ModelAndView("user_product_table.html :: product");
-	}
-	
+	/*
+	 * As user makes changes in search bar on product page, this will be called setting the search results
+	 */
 	@PostMapping("/productChangeSearch")
-	public ModelAndView postProductChangeSearch(Map<String, Object> model, @RequestBody Map<String, String> data) {
-		searchStr = data.get("searchStr");
-		return new ModelAndView("redirect:/productChangeSearch");
+	public ModelAndView postProductChangeSearch(Map<String, Object> model, @RequestBody Map<String, String> data, HttpServletRequest req) {
+		req.getSession().setAttribute("searchStr", data.get("searchStr"));
+		return new ModelAndView("redirect:/productChangeEntries");
 	}
 	
+	/*
+	 * When an admin is adding a product, this method call will redirect them to said page
+	 */
 	@GetMapping("/add_product")
 	public String addProduct(Model model) {
 		Product product = new Product();
@@ -103,6 +115,10 @@ public class ProductWebController {
 		return "add_product";
 	}
 	
+	/*
+	 * Working in tandem with the above method, this will add the product to DB
+	 * as well as return admin to add_product page if in input is invalid
+	 */
 	@PostMapping("/save_product")
 	public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
 		if(result.hasErrors())
@@ -112,12 +128,20 @@ public class ProductWebController {
 		return "redirect:/product";
 	}
 	
+	/*
+	 * When an admin is updating a product, this will direct them to the update_product
+	 * page with the attribute of the specific product
+	 */
 	@GetMapping("/update_product/{id}")
 	public String updateProduct(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("product",productController.getProduct(id));
 		return "update_product";
 	}
 	
+	/*
+	 * Working in tandem with the above method, this will save the updated product
+	 * to the DB and return admin to update_product page if input is invalid
+	 */
 	@PostMapping("/save_update")
 	public String saveUpdateProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
 		if(result.hasErrors())
@@ -127,6 +151,10 @@ public class ProductWebController {
 		return "redirect:/product";
 	}
 	
+	/*
+	 * From within the update_product page, the admin is able delete the product
+	 * this will be called to the method to then delete product from DB and redirect
+	 */
 	@PostMapping("/delete_product/{id}")
 	public String deleteProduct(@PathVariable("id") Long id) {
 		System.out.println("Delete visited");

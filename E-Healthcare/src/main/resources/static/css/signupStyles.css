@@ -56,3 +56,11 @@ input:placeholder-shown {
 #message {
 	visibility: hidden;
 }
+
+#error{
+	color: red;
+	font-weight: bold;
+	display:block;
+	padding-right: 20px;
+	
+}

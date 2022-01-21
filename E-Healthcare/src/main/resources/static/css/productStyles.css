@@ -43,6 +43,10 @@ h2#editHeader {
 	cursor: pointer;
 }
 
+#refresh {
+	cursor: pointer;
+}
+
 input[type=number] {
 	width: 50px;
 }
