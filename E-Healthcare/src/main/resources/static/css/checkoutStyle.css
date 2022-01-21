@@ -52,7 +52,7 @@ body {
  
 }
 
-input[type=text] {
+input[type=text], input[type=email] { /* pattern="^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$" */
   width: 100%;
   margin-bottom: 20px;
   padding: 12px;
