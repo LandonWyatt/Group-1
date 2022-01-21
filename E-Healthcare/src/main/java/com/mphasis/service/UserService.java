@@ -26,13 +26,9 @@ public class UserService {
 		return userRepository.findById(id);
 	}
 	
-	public Boolean checkUser(Long id) {
-		if (userRepository.findById(id) != null)
-			return true;
-		else
-			return false;
-	}
-	
+	/*
+	 * Checks if user's email matches password
+	 */
 	public String validateUser(User user) {
 		List<User> userlist = userRepository.findByEmail(user.getEmail());
 		User userFromDb = userlist.get(0);
@@ -44,10 +40,16 @@ public class UserService {
 		return null;
 	}
 	
+	/*
+	 * Adds User to DB table
+	 */
 	public void addUser(User user) {
 		userRepository.save(user);
 	}
 	
+	/*
+	 * Checks if user exists by email
+	 */
 	public boolean checkIfUserExists(String email) {
 		List<User> userlist = userRepository.findByEmail(email);
 		

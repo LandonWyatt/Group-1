@@ -34,15 +34,15 @@ public class LoginController {
 	 */
 	@PostMapping("/login")
 	public String checkLoginPage(@ModelAttribute User user, Model model, final RedirectAttributes redirectAttributes) {
-	String firstName = userService.validateUser(user); // tweak later, simply checks if user exists right now
-	if(firstName != null) { 
-		
-		model.addAttribute("firstName", firstName);
-		redirectAttributes.addAttribute("firstName", firstName);
-		return "redirect:/product";
-	}
-		
-	return "login";
+		String firstName = userService.validateUser(user); // tweak later, simply checks if user exists right now
+		if(firstName != null) { 
+			
+			model.addAttribute("firstName", firstName);
+			redirectAttributes.addAttribute("firstName", firstName);
+			return "redirect:/product";
+		}
+			
+		return "login";
 	}
 	
 }
