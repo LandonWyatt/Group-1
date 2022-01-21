@@ -9,12 +9,19 @@ import org.springframework.stereotype.Service;
 import com.mphasis.model.User;
 import com.mphasis.repository.UserRepository;
 
+/*
+ * Service file interacts with the database through the repository to perform any
+ * SQL calls needed for the controllers
+ */
 @Service
 public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
 	
+	/*
+	 * Finds user based on ID
+	 */
 	public Optional<User> getUser(Long id) {
 		return userRepository.findById(id);
 	}

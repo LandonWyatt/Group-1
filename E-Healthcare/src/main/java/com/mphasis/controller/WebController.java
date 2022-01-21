@@ -5,6 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/*
+ * Controller that will redirect any overall method calls to different pages
+ */
 @Controller
 public class WebController {
 	
@@ -36,15 +39,5 @@ public class WebController {
 	public String getCheckout() {
 		return "checkout";
 	}
-	
-	/*
-	 * @GetMapping("/login") public String getLogin() { return "login"; }
-	 */
-	
-	/*
-	 * @GetMapping("/signup") public String getSignup() { return "signup"; }
-	 */
-	
-	
 
 }

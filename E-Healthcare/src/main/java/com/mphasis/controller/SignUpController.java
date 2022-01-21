@@ -10,19 +10,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.mphasis.model.User;
 import com.mphasis.service.UserService;
 
+/*
+ * Controller that will redirect all mappings for any sign up related method calls
+ */
 @Controller
 public class SignUpController {
 	
 	@Autowired
 	private UserService userService;
 	
-	  @GetMapping("/signup") 
-	  public String getSignup(Model model){
-		  model.addAttribute("user", new User());
-		  return "signup";
-	  }
+	/*
+	 * Redirects user to sign up page
+	 */
+	@GetMapping("/signup") 
+	public String getSignup(Model model){
+		model.addAttribute("user", new User());
+		return "signup";
+	}
 	 
-	
+	/*
+	 * Retrieves information of new user and registers them in the DB
+	 */
 	@PostMapping("/signup")
 	public String signUpUserPage(@ModelAttribute User user, Model model) {
 		System.out.println("register button code will go here ");

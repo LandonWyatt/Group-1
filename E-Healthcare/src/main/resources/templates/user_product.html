@@ -47,7 +47,7 @@
 				</select>
 				entries
 			</label>
-			<label class="defineEntries" id="searchEntries" hx-trigger="change delay:0.1s" hx-get="/productChangeSearch" hx-target="#table" hx-swap="outerHTML">
+			<label class="defineEntries" id="searchEntries" hx-trigger="keyup change delay:0.1s from:#searchBar" hx-get="/productChangeEntries" hx-target="#table" hx-swap="outerHTML">
 				<input type="text" placeholder="Search Name or Brand..." id="searchBar" name="searchBar" onkeyup="takeInput()">
 			</label>
 			<br/>

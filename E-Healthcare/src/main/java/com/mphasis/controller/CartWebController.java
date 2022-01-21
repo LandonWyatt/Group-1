@@ -15,15 +15,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mphasis.model.Product;
 
+/*
+ * Web Controller that will redirect all mappings for any cart related method calls
+ */
 @Controller
 public class CartWebController {
 	
 	@Autowired
 	private ProductController productController;
+	// Creates cart map that will contain all items from user's cart
 	private Map<Product, Integer> cartMap = new HashMap<Product, Integer>();
+	// list of products from cartMap to then iterate through
 	private List<Product> cartKeyList = Collections.synchronizedList(new ArrayList<>());
 	private double totalSum = 0;
 	
+	/*
+	 * Sends initial cart.html page to user with totalSum and their products
+	 */
 	@GetMapping("/cart")
 	public ModelAndView getCart(Map<String, Object> model) {
 		model.put("totalSum", totalSum);
@@ -31,24 +39,28 @@ public class CartWebController {
 		return new ModelAndView("cart");
 	}
 	
+	/*
+	 * Saves product to cart based on the id that is retrieved
+	 */
 	@GetMapping("/save_to_cart/{id}")
 	public String saveToCart(Map<String, Object> model, @PathVariable("id") Long id) {
 		Product p = productController.getProduct(id);
+		// Check if Map is empty, if so, then place product with quantity 1
 		if(cartKeyList.isEmpty()) {
 			cartMap.put(p, 1);
 			cartKeyList = new ArrayList<>(cartMap.keySet());
 		}
-		else {
+		else { // else, see if product is already in cart
 			boolean inCart = false;
 			Iterator<Product> iter = cartKeyList.iterator();
 			while(iter.hasNext()) {
 				Product item = iter.next();
-				if(item.getId() == id) {
+				if(item.getId() == id) { // if so, then increase quantity by one
 					cartMap.put(item, cartMap.get(item) + 1);
 					inCart = true;
 				}
 			}
-			if(!inCart) {
+			if(!inCart) { // else, if product is not in cart, add it
 				cartMap.put(p, 1);
 				cartKeyList = new ArrayList<>(cartMap.keySet());
 			}
@@ -56,11 +68,14 @@ public class CartWebController {
 		return "redirect:/totalSum";
 	}
 	
+	/*
+	 * Remove product from cart based on ID
+	 */
 	@GetMapping("/remove_from_cart/{id}")
 	public String removeFromCart(Map<String, Object> model, @PathVariable("id") Long id) {
 		System.out.println(cartKeyList);
 		Iterator<Product> iter = cartKeyList.iterator();
-		while(iter.hasNext()) {
+		while(iter.hasNext()) { // Find product, then delete
 			Product item = iter.next();
 			if(item.getId() == id) {
 				cartMap.remove(item);
@@ -71,6 +86,11 @@ public class CartWebController {
 		return "redirect:/totalSum";
 	}
 	
+	/*
+	 * Calculates total sum in cart by going through each Map entry
+	 * and adding the price * quantity to the total sum
+	 *  - called each time a new product is added or deleted
+	 */
 	@GetMapping("/totalSum")
 	public String calculateTotalSum(Map<String, Object> model) {
 		totalSum = 0;
@@ -84,6 +104,9 @@ public class CartWebController {
 		return "redirect:/cart";
 	}
 	
+	/*
+	 * Sends information to the checkout receipt page and returns to user
+	 */
 	@GetMapping("/checkoutReceipt")
 	public String checkoutReceipt(Map<String, Object> model) {
 		Map<Product, Integer> cartMapHolder = new HashMap<Product, Integer>();
@@ -97,16 +120,5 @@ public class CartWebController {
 		totalSum = 0;
 		return "thanks";
 	}
-	
-//	@PostMapping("/update_cart")
-//	public ModelAndView updateCart(Map<String, Object> model, @RequestBody Map<String, String> data){
-//		qtyInfo = data.get("qtyInfo");
-//		Long id = Long.parseLong(data.get("id"));
-//		Product p = productController.getProduct(id);
-//		double subTotal = p.getPrice() * Double.parseDouble(qtyInfo);
-//		model.put("subTotal", subTotal);
-//		select = subTotal;
-//		return new ModelAndView("redirect:/cart");
-//	}
 	
 }
