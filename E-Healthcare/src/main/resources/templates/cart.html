@@ -26,7 +26,7 @@
 			<h2>
 				Your Cart:
 			</h2>
-			<table class="cartTable" hx-trigger="click delay:0.1s from:#refresh" hx-get="/cart" hx-target=".cartTable" hx-swap="outerHTML">
+			<table class="cartTable">
 				<thead>
 					<tr>
 						<th>Product</th>
@@ -35,7 +35,7 @@
 						<th>Subtotal</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody >
 					<tr id="cartProduct" th:each="product : ${products}">
 						<td>
 							<div id="productInCart">
@@ -48,21 +48,79 @@
 							</div>
 						</td>
 						<td th:text="${'$' + product.key.price}"></td>
-						<td id="qtyInCart" th:text="${product.value}"></td>
+						<td>
+							<input type="number" th:id="qtyInCart" th:value="${product.value}" min="1" th:name="${product.key.id}" th:onchange="|qtyInput(this,'${product.key.id}')|">
+						</td>
 						<td th:text="${'$' + product.key.price * product.value}"></td>
 						<td>
+							<a th:href="@{/cart}"><img id="refresh" src="/images/refresh.png" alt="Refresh" height="30"/></a>
 							<a th:href="@{/remove_from_cart/{id}(id=${product.key.id})}"><img src="/images/delete.png" alt="Delete" height="30" /></a>
 						</td>
 					</tr>
 					<tr id="cartManagement">
-						<td><button type="submit" id="continueShoppingButton"><b>&#8249</b> Continue Shopping</button></td>
+						<td><a th:href="@{/product}" style="text-decoration:none"><button type="submit" id="continueShoppingButton"><b>&#8249</b> Continue Shopping</button></a></td>
 						<td></td>
 						<td></td>
 						<td>Total: <b>$<span th:text="${totalSum}"></span></b></td>
-						<td><a th:href="@{/checkout}"><button type="submit" id="checkoutButton">Checkout<b>&#8250</b></button></a></td>
+						<td><a th:href="@{/checkout}" style="text-decoration:none"><button type="submit" id="checkoutButton" >Checkout <b>&#8250</b></button></a></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</body>
+	<footer class="footer-distributed" >
+
+			<div class="footer-left">
+          
+				<h3>About<span>Medicine</span></h3>
+
+				<p class="footer-links">
+					<a th:href="@{/}">Home</a>
+					
+					|
+					<a th:href="@{/about}">About</a>
+					|
+					<a th:href="@{/contact}">Contact</a>
+				</p>
+
+				<p class="footer-company-name">© 2022 HealthCare Solutions Pvt. Ltd.</p>
+			</div>
+
+			<div class="footer-center">
+				<div>
+					<i class="fa fa-map-marker"></i>
+					  <p><span>2002 Hicombe Boulevard</span>
+						Houston Texas 77030 </p>
+				</div>
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>843-433-9898</p>
+				</div>
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@healthcare.com">support@healthcare.com</a></p>
+				</div>
+			</div>
+			<div class="footer-right">
+				<p class="footer-company-about">
+					<span>About the company</span>
+					We are ddelivering and distribution of high-quality manufactured medications at the lowest price.  </p>
+				<div class="footer-icons">
+					<a href="#"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-instagram"></i></a>
+					<a href="#"><i class="fa fa-linkedin"></i></a>
+					<a href="#"><i class="fa fa-youtube"></i></a>
+				</div>
+			</div>
+		</footer>
+		
+
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="/js/headroom.min.js"></script>
+	<script src="/js/jQuery.headroom.min.js"></script>
+	<script src="/js/template.js"></script>
 </html>

@@ -41,13 +41,9 @@ function sort(sortOrder) {
 }
 
 /* Cart update Script */
-function qtyInput(sel) {
-	console.log("test");
-	console.log(sel.name);
-	var qtyToCart = document.getElementById("qtyToCart").value;
-	console.log(qtyToCart);
+function qtyInput(sel, id) {
 	
-	let data = {qtyInfo: qtyToCart, id: sel.name};
+	let data = {qtyInfo: sel.value, id: id};
 	
 	fetch("/update_cart", {
 	  method: "POST",

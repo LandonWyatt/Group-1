@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +31,6 @@ public class ProductWebController {
 	
 	@Autowired
 	private ProductController productController;
-	private int numEntries = 5; // initial number of entries
-	private String searchStr = ""; // initial search string, which will show every entry
 	
 	// Determine if visiting as an Admin or not
 	private boolean admin = false;
@@ -39,20 +39,27 @@ public class ProductWebController {
 	 * directs the user to the two different product pages, based on being admin or not, on initial visit
 	 */
 	@GetMapping("/product")
-	public ModelAndView getProducts(Map<String, Object> model, Model pageModel, @RequestParam(required = false) String firstName) {
-		List<Product> productsList = productController.getAllProductSearch(searchStr);
+	public ModelAndView getProducts(Map<String, Object> model, @RequestParam(required = false) String firstName, HttpSession session, HttpServletRequest req) {
+		// Set initial value to numEntries in session
+		if(session.getAttribute("numEntries") == null)
+			req.getSession().setAttribute("numEntries", 5);
+		// Set initial value to searchStr in session
+		if(session.getAttribute("searchStr") == null)
+			req.getSession().setAttribute("searchStr", "");
+		
+		List<Product> productsList = productController.getAllProductSearch((String) session.getAttribute("searchStr"));
 		
 		if(!admin)
 			productsList = productsList.stream().filter((Product prod) -> {return prod.isActivate();}).collect(Collectors.toList());
 		
-		model.put("numChosen", numEntries);
+		model.put("numChosen", session.getAttribute("numEntries"));
 		model.put("products", productsList);
 		
 		if(admin) {
-			pageModel.addAttribute("firstName", firstName);
+			model.put("firstName", firstName);
 			return new ModelAndView("admin_product");
 		} else {
-			pageModel.addAttribute("firstName", firstName);
+			model.put("firstName", firstName);
 			return new ModelAndView("user_product");
 		}
 			
@@ -65,13 +72,13 @@ public class ProductWebController {
 	 *    are called to then be placed in the admin_product and user_product pages
 	 */
 	@GetMapping("/productChangeEntries")
-	public ModelAndView getProductChangeEntries(Map<String, Object> model) {
-		List<Product> productsList = productController.getAllProductSearch(searchStr);
+	public ModelAndView getProductChangeEntries(Map<String, Object> model, HttpSession session) {
+		List<Product> productsList = productController.getAllProductSearch((String) session.getAttribute("searchStr"));
 		
 		if(!admin)
 			productsList = productsList.stream().filter((Product prod) -> {return prod.isActivate();}).collect(Collectors.toList());
 		
-		model.put("numChosen", numEntries);
+		model.put("numChosen", session.getAttribute("numEntries"));
 		model.put("products", productsList);
 		
 		if(admin)
@@ -84,8 +91,9 @@ public class ProductWebController {
 	 * When user changes entry count on product page, this will be called setting the number of entries
 	 */
 	@PostMapping("/productChangeEntries")
-	public ModelAndView postProductChangeEntries(Map<String, Object> model, @RequestBody Map<String, String> data) {
-		numEntries = Integer.parseInt(data.get("numEntries"));
+	public ModelAndView postProductChangeEntries(Map<String, Object> model, @RequestBody Map<String, String> data, HttpServletRequest req) {
+		req.getSession().setAttribute("numEntries", Integer.parseInt(data.get("numEntries")));
+//		numEntries = Integer.parseInt(data.get("numEntries"));
 		return new ModelAndView("redirect:/productChangeEntries");
 	}
 	
@@ -93,8 +101,8 @@ public class ProductWebController {
 	 * As user makes changes in search bar on product page, this will be called setting the search results
 	 */
 	@PostMapping("/productChangeSearch")
-	public ModelAndView postProductChangeSearch(Map<String, Object> model, @RequestBody Map<String, String> data) {
-		searchStr = data.get("searchStr");
+	public ModelAndView postProductChangeSearch(Map<String, Object> model, @RequestBody Map<String, String> data, HttpServletRequest req) {
+		req.getSession().setAttribute("searchStr", data.get("searchStr"));
 		return new ModelAndView("redirect:/productChangeEntries");
 	}
 	

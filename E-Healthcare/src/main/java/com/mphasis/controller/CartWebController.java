@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mphasis.model.Product;
@@ -86,6 +88,21 @@ public class CartWebController {
 		return "redirect:/totalSum";
 	}
 	
+	@PostMapping("/update_cart")
+	public String updateQty(Map<String, Object> model, @RequestBody Map<String, String> data) {
+		Product prod = new Product();
+			
+		for (Product product : cartKeyList) {
+			if (product.getId() == Long.parseLong(data.get("id")))
+				prod = product;
+		}
+		if(Integer.parseInt(data.get("qtyInfo")) < 1)
+			cartMap.put(prod, 1);
+		else
+			cartMap.put(prod, Integer.parseInt(data.get("qtyInfo")));
+		return "redirect:/totalSum";
+	}
+	
 	/*
 	 * Calculates total sum in cart by going through each Map entry
 	 * and adding the price * quantity to the total sum
@@ -98,8 +115,6 @@ public class CartWebController {
 		for(Map.Entry<Product, Integer> prodEntry : cartMap.entrySet()) {
 			totalSum += prodEntry.getKey().getPrice() * prodEntry.getValue();
 		}
-		
-		System.out.println(totalSum);
 		
 		return "redirect:/cart";
 	}
