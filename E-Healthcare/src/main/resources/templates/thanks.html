@@ -37,7 +37,7 @@ document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-
           <div class="plan-div">
 		  <div class="ticket">
             <p class="centered">
-			<p style="font-family: cursive;font-size:14px">HealthCare</b> Solutions</br>2002 Hicombe Boulevard<br>Houston Texas 77030<br>843-433-9898</p>
+			<p style="font-family: cursive;font-size:14px"><b>HealthCare Solutions</b><br>2002 Hicombe Boulevard<br>Houston Texas 77030<br>843-433-9898</p>
 				
 		        <table class="center">
                 <thead>
@@ -71,11 +71,12 @@ document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-
 
           <div class="card-cta">
             <div class="proceed-btn">
-              <button>Log Out</button>
+              <a th:href="@{/}"><button>Log Out</button></a>
             </div>
           
         </div>
       </div>
+    </div>
     </div>
   </body>
 </html>

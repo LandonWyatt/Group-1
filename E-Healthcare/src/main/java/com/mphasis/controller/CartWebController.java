@@ -86,8 +86,15 @@ public class CartWebController {
 	
 	@GetMapping("/checkoutReceipt")
 	public String checkoutReceipt(Map<String, Object> model) {
-		model.put("totalSum", totalSum);
-		model.put("products", cartMap);
+		Map<Product, Integer> cartMapHolder = new HashMap<Product, Integer>();
+		double totalSumHolder = 0;
+		cartMapHolder = cartMap;
+		totalSumHolder = totalSum;
+		model.put("totalSum", totalSumHolder);
+		model.put("products", cartMapHolder);
+		cartMap = new HashMap<>();
+		cartKeyList = Collections.synchronizedList(new ArrayList<>());
+		totalSum = 0;
 		return "thanks";
 	}
 	
