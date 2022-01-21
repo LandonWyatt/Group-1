@@ -39,10 +39,6 @@ document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-
             <p class="centered">
 			<p style="font-family: cursive;font-size:14px">HealthCare</b> Solutions</br>2002 Hicombe Boulevard<br>Houston Texas 77030<br>843-433-9898</p>
 				
-              
-				<p>Email : <h3></h3></p>
-				<p>Credit card # : <h3></h3></p>
-				<p>Date : <h3 id='datetime'><h3></p>
 		        <table class="center">
                 <thead>
                     <tr>
@@ -60,6 +56,8 @@ document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-
 						<td class="price" th:text="${'$' + product.key.price * product.value}"></td>
                     </tr>
                     <tr>
+                    	<td></td>
+                    	<td></td>
                         <td class="name">TOTAL</td>
                         <td class="price" th:text="${'$' + totalSum}"></td>
                     </tr>
