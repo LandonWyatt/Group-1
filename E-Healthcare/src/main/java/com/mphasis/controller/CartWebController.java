@@ -87,6 +87,9 @@ public class CartWebController {
 		return "redirect:/totalSum";
 	}
 	
+	/*
+	 * Updates cart quantity for the determined product, then updates map and redirects to totalSum
+	 */
 	@PostMapping("/update_cart")
 	public String updateQty(Map<String, Object> model, @RequestBody Map<String, String> data) {
 		Product prod = new Product();

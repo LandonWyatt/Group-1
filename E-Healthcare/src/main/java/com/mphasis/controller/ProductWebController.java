@@ -93,7 +93,6 @@ public class ProductWebController {
 	@PostMapping("/productChangeEntries")
 	public ModelAndView postProductChangeEntries(Map<String, Object> model, @RequestBody Map<String, String> data, HttpServletRequest req) {
 		req.getSession().setAttribute("numEntries", Integer.parseInt(data.get("numEntries")));
-//		numEntries = Integer.parseInt(data.get("numEntries"));
 		return new ModelAndView("redirect:/productChangeEntries");
 	}
 	
