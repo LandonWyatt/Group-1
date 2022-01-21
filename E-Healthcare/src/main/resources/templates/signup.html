@@ -26,7 +26,7 @@
 		<form action="#" th:action="@{/signup}" th:object="${user}" method="post">
 			<div class="container">
 				<h1 id="signupHeader1">Register</h1>
-				<label  th:text="${errorMessage}"></label>
+				<label id="error" th:text="${errorMessage}"></label>
 				<div id="signupInputs">
 				    <label>First Name:</label>
 					<input id=firstName type="text" th:field="*{firstName}" placeholder="Enter First Name" name="firstname" required><br>
